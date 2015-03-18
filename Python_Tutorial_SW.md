@@ -60,11 +60,14 @@ def double(x):
    return 2 * x
 ```   
 
-  
+```python
 print double(2)
+```
 4
 
+```python
 print double('hello')
+```
 hellohello
 
 In the first case, the function took an integer and returned an integer; in the second, it took a string and returned a string. Python's quite happy to do this...
@@ -78,11 +81,15 @@ def adjust(value, amount=2.0):
 ```
 
 If we call this function with one parameter, it is assigned to value, and 2.0 is used for amount
+```python
 print adjust(5)
+```
 10
 
 If we call it with two parameters, the second overrides the default for amount.
+```python
 print adjust(5, 1.001)
+```
 5.005
 
 ### Why do we write functions
@@ -139,7 +146,7 @@ Some important libraries often used in scientific computing:
 
 ![Scientific Ecosystem Python](EcosystemHomoScientificus.png)
 
-from [Christian Elsaesser](http://www.physik.uzh.ch/~python/python_2015-01/lecture4))
+from [Christian Elsaesser](http://www.physik.uzh.ch/~python/python_2015-01/lecture4)
   
   
   
@@ -291,7 +298,7 @@ print PhoneNumbers['Mary']
 would print out Mary's phone number.
 
 
-*Tip* Python does allow a statement to be split across lines if the splits occurs within (),[] or {}.
+:bulb: Python does allow a statement to be split across lines if the splits occurs within (),[] or {}.
 ```python
 PhoneNumbers = {
 	'John':'463673',
@@ -300,7 +307,7 @@ PhoneNumbers = {
 is also valid, and often helps to make long list/dictionary entries more readible.
 
 
-*Tip* The third way of creating is handy when you have 2 lists, one containing keys and the other containing values.
+:bulb: The third way of creating is handy when you have 2 lists, one containing keys and the other containing values.
 ```python
 Names = ['John','Mary']
 Numbers = ['463673','279943']
@@ -472,8 +479,9 @@ Main functions |    |
 ---------------|-----
 set.add('')    | Add element
 set.remove('')    | Remove element
-
-
+  
+  
+  
 
 Methods | Operators
 --------|-----------
