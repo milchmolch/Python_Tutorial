@@ -34,15 +34,9 @@ def SquareNumber(Number):
 To call a function, we just use the function's name, followed by the arguments in parentheses:  
 `SquareNumber(4)` returns 16.  
   
-
-
-In Python, the program can only "see" variables in the current frame and the base "global" frame.
-If the current and global frames have variables with the same name, the one in the current frame takes precedence.
-In other words, within a function you do not care 
-
-
+ 
+A function can have many `return`s:
 ```python
-A function can have many `return`s
 def sign(num):
     if num > 0:
 	   return 1
@@ -51,6 +45,9 @@ def sign(num):
 	else:
 	   return -1
 ```
+
+
+Be aware that any variables that we create as part of the function only exist inside the function, and cannot be accessed outside (like in loops). 
 
 
 Like variables, in Python functions don't have specific types.
@@ -136,8 +133,8 @@ Now we want to define a more useful function which accepts lower and uppercase c
 
 ## 7. Libraries
 
-Only the very basic Python functionality is available out of the box. For more specialized tasks,
-we need to import additional functions bundled in **libraries** (aka modules or packages that are collections of modules).
+Only the basic Python functionality is available out of the box. For more specialized tasks,
+we need to import additional third-party functions bundled in **libraries** (aka modules or packages that are collections of modules).
 
 There are thousands of libraries available for every imaginable task: web development, databases, game development,
 image manipulation, system administration, ...
@@ -159,7 +156,8 @@ random | Random sampling and numbers
 NumPy | Multidimensional array, numerical computing, linear algebra
 SciPy | Numerical integration & optimization
 Matplotlib | plotting
-pandas | Data structures & analysis (data frames!) 
+pandas | Data structures & analysis (data frames!)
+rpy2 | Using R from python
 IPython | Interactive Console
 Biopython | Biological computation
 Sympy | Symbolic mathematics
@@ -175,14 +173,14 @@ For R users: there is **pandas**, a rising star inspired by data.frames in R.
 
 ### Loading modules
 
-To use a module in a Python program it needs to be installed on the system and has to be imported. We will talk about module installation in a later paragraph.
+In order to use a module, it must both be installed on your computer and imported into your program. There are some built-in modules that come with Python, including `sys`, `os`, `math`, `random`, `time` (obtaining and converting dates and times), `re` (regular expressions).
 
 A module is imported using the `import` statement. For example, to import the module math, which contains many standard mathematical functions, we do:
 ```python
 import math
 print math.log(40)
 ```
-3.68887945411  
+*3.68887945411*  
   
 Note that we to call the function using the `ModuleName.FunctionName` syntax.
 
@@ -192,9 +190,9 @@ A more convenient way if we need only 1 function is
 from math import log
 print log(40)
 ```
-3.68887945411
+*3.68887945411*
   
-Note that we can call `log` directly.
+Note that we called `log` directly.
   
   
 We can also import a function under a different name (handy if two modules define functions with the same name)
@@ -202,7 +200,7 @@ We can also import a function under a different name (handy if two modules defin
 from math import log as ln
 print ln(40)
 ```
-3.68887945411
+*3.68887945411*
 
 
 We can also use `import *` to bring everything in the module into the current namespace at once. This is almost always a bad idea.
@@ -213,7 +211,27 @@ If someone adds a new function or variable to the next version of the module, th
 from math import *
 ```
 
-#### Command-line arguments
+
+### Installing modules
+
+With the exception of a few built-in modules (like os, sys, random) modules have to be installed on your system. 
+
+
+
+pipy
+easy_install
+Linux package manager
+Anaconda: conda
+
+### Exercise
+
+Import the module math and list the functions (methods) that are provided by it:
+
+Then in Spyder type 'math.', then a window open showing you all the available 
+
+- Check for a few functions what they are doing using the help page
+
+### (Optional) Command-line arguments
 
 Copy the following lines and save them as `test_argv.py` using spyder.
 
@@ -243,21 +261,9 @@ else:
 print LineCount
 ```
 
-  
+If you make extensive use of command-line options have a look into the module `argparse`.
 
 Every Python file can be used as a library by other programs
-
-
-### Installing modules
-
-With the exception of a few built-in modules (like os, sys, random) modules have to be installed on your system. 
-
-
-
-pipy
-easy_install
-Linux package manager
-Anaconda: conda
 
 
 ## 8. Dictionaries
@@ -269,14 +275,29 @@ Anaconda: conda
 - Keys can be integers or strings ()
 - Unordered: Elements don't have a fixed position
 
+
 ```python
 PhoneNumbers = {}     				# Create an empty dictionary 
 PhoneNumbers['John'] = ['463673']
 PhoneNumbers['Mary'] = ['279943']
 ```
 
-True to the dictionary analogy, values in dictionaies are looked up according to their keys, rather than by their position 
-(as would happen in a list).
+True to the dictionary analogy, values in dictionaries are looked up according to their keys, rather than by their position 
+(as would happen in a list). 
+
+We extract values from the dictionary using square brackets []
+```python
+print PhoneNumbers['Mary']
+```
+would print out Mary's phone number `279943`.
+
+
+The contents of dictionaries can be modified
+```python
+PhoneNumbers['Mary'] = '123'
+print PhoneNumbers['Mary']
+```
+*123*
 
 
 There are several ways to create dictionaries. The most direct way is like this:
@@ -290,14 +311,6 @@ PhoneNumbers = {'John':'463673', 'Mary':'279943'}
 
 In this example, the keys are strings, and the values are strings.
 
-
-We extract values from the dictionary using square brackets []
-```python
-print PhoneNumbers['Mary']
-```
-would print out Mary's phone number.
-
-
 :bulb: Python does allow a statement to be split across lines if the splits occurs within (),[] or {}.
 ```python
 PhoneNumbers = {
@@ -305,6 +318,7 @@ PhoneNumbers = {
 	'Mary':'279943' }
 ```
 is also valid, and often helps to make long list/dictionary entries more readible.
+
 
 
 :bulb: The third way of creating is handy when you have 2 lists, one containing keys and the other containing values.
@@ -318,18 +332,15 @@ If we are not sure whether a key is in a dictionary or not, we can test it:
 ```python
 'Robbie' in PhoneNumbers
 ```
-```html
-   <style="color:blue"> False </style>
-```
+*False*
+
 ```python
 'Mary' in PhoneNumbers
 ```
-```html
-   <style="color:blue">True</style>
-```
+*True*
 
-Its often handy to combined dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
-of Blast hits with particular proteins.
+Its often convenient to combine dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
+of Tree measurements with particular sites.
 
 ```python
 TreeStat = {}
@@ -338,29 +349,41 @@ TreeStat['Juneau'] = [73, 48.7, -134.2]
 TreeStat['Barrow'] = [13, 52.5, -156.5]
 ```
 
-More flexible than lists: In a dictionary, you can create an entry e.g. for key 16 without having any data corresponding to keys 0 to 15. This lets you fill in data as they become known.
+Dictionaries are more flexible than lists: In a dictionary, you can create an entry e.g. for key 16 without having any data corresponding to keys 0 to 15. This lets you fill in data as they become known.
 
+Importantly, dictionaries provide efficient lookup.
 
 ### Exercise: Codon Table
 
-We use Python's elegance for preparing a codon table:
-```python
-bases = ['t', 'c', 'a', 'g']
-codons = [a+b+c for a in bases for b in bases for c in bases]
-amino_acids = 'FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG'
-codon_table = dict(zip(codons, amino_acids))
-```
-
-Recode the above functionality in a less pythonic (more general) way using *for* loops
-
-
-Now we have a dictionary codon_table containing the codon table, it will look up the amino acid
+We have a dictionary codon_table containing the codon table, it will look up the amino acid
 encoded by the codon. 
 
-`print codon_table['atg']` will print out 'M'
+```python
+codon_table = {
+    'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M', 'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
+    'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K', 'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',
+    'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L', 'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
+    'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q', 'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
+    'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V', 'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
+    'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E', 'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
+    'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S', 'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
+    'TAC':'Y', 'TAT':'Y', 'TAA':'*', 'TAG':'*', 'TGC':'C', 'TGT':'C', 'TGA':'*', 'TGG':'W'}
+```
+
+For instance, `print codon_table['ATG']` will print out 'M'
+
+
+1. Write a script that prints out the protein sequence encoded by the DNA 'GTGCGGCCACCT'
+2. Convert it into a function (if you did not write it as a function)
+3. Improve it by allowing lower case letters, check that all letters are valid codons, ... 
+4. Make a count table how many codons encode the same amino acid
+5. Write a backtranslator (protein -> DNA)
+
 
 
 ### Exercise: Counting birds
+
+
 
 ```python
 \# CountInsects.py
@@ -514,11 +537,13 @@ Test with simple (simplified) made-up input file
 
 ## Learning more Python
 
+[Python for Biologists (mostly sequence analysis)](http://pythonforbiologists.com/)
 [Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
-programmingforbiologists.com
 
 
-### Exercises
+
+
+### To do 
 
 ### 1. IDE
 
@@ -528,21 +553,9 @@ Which type has variable 'XXX'?
  
 ### 2. Functions
 
-Write a function 
 
-
-```python
-def greet():
-    return 'Good morning, master'
-```
-
-To call it, we just use the function's name, followed in this case by empty parentheses:
-```python
 temp = greet()
-print temp
-```
-```html
-   <span="color:red">Good morning, master</span>
+
 ```
 
 ### 3. Libraries
