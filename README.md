@@ -235,4 +235,13 @@ Squares = [Val**2 for Val in MyList]
 
 - Be careful when copying lists or dictionaries in python: its 'name copying'. See [video on aliasing](http://software-carpentry.org/v4/python/alias.html) 
 
-
+- In Python, an integer division will give an **integer** result
+```
+1.0 / 2 --> 0.5
+1 / 2.0 --> 0.5
+1 / 2 --> 0
+``` 
+To prevent unexpected results either make sure that at least one value is a real number using `float()` or, alternatively, put the following line at the beginning of your script
+```python
+from __future__ import division
+```

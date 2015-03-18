@@ -155,16 +155,18 @@ sys | System-level commands (sys.argv!)
 random | Random sampling and numbers
 NumPy | Multidimensional array, numerical computing, linear algebra
 SciPy | Numerical integration & optimization
+Sympy | Symbolic mathematics
 Matplotlib | plotting
 pandas | Data structures & analysis (data frames!)
 rpy2 | Using R from python
 IPython | Interactive Console
 Biopython | Biological computation
-Sympy | Symbolic mathematics
+pysam | SAM reading & manipulation
+
 
 
 Particularly interesting for bioinformatics is **Biopython** which provides 
-tools for computational molecular biology (sequence analysis, Alignment, BLAST, Phylogeny, Pubmed,...)
+tools for computational molecular biology (sequence analysis, Alignment, BLAST, Phylogeny, Pubmed,...) and **pysam**, a module for reading and manipulating BAM files. 
 
 For R users: there is **pandas**, a rising star inspired by data.frames in R. 
 
@@ -203,14 +205,13 @@ print ln(40)
 *3.68887945411*
 
 
-We can also use `import *` to bring everything in the module into the current namespace at once. This is almost always a bad idea.
-If someone adds a new function or variable to the next version of the module, that `import *` could silently overwrite something that you're importing from somewhere else, leading to a hard-to-find bug.
+We can also use `import *` to bring everything in the module into the current namespace at once. This is convenient but can be dangerous, however, ff someone adds a new function or variable to the next version of the module, that `import *` could silently overwrite something that you're importing from somewhere else, leading to a hard-to-find bug.
 
 ```python
-\#not good practice
 from math import *
+print log(40)
 ```
-
+*3.68887945411*
 
 ### Installing modules
 
@@ -537,9 +538,16 @@ Test with simple (simplified) made-up input file
 
 ## Learning more Python
 
+**More exercises**
+[Interactive basic course with exercises](http://www.codecademy.com/courses/python-beginner-en-pwmb1)
+[Exercises (requires registration)](http://www.programmr.com/zone/python)
+  
+**Other courses**
 [Python for Biologists (mostly sequence analysis)](http://pythonforbiologists.com/)
+[Dive into Python](http://diveintopython.org)
 [Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
-
+[Edx online course <introduction into computer science>: Interesting but time-consuming (90hrs):
+(https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-0#.VNOMIGSG-PW)
 
 
 
