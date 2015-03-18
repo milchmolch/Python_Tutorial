@@ -10,7 +10,7 @@ Stefan Wyder & Heidi Lischer
 ## Introduction to Python
 
 
-1. Introduction (Why Python? IDE)
+1. Introduction (Why Python?)
 2. Basics
 3. Control Flow
 4. Lists
@@ -75,7 +75,8 @@ Spyder is a MATLAB-like IDE for scientific computing with python. It has many ni
 
 ### Getting help
 
-- The help() function and pydoc are often not very helpful
+- the built-in help() function (e.g `help(round)`) and pydoc are often not very helpful
+- use `object?` in the IPython console, e.g `floor?`
 - use Google
 - use https://docs.python.org/2/ 
 - use dir() in the console
@@ -231,6 +232,6 @@ Squares = [Val**2 for Val in MyList]
 
 - In R, variable names can contain special characters "." and "_", whereas in python only "_" is allowed.
 
-- Be careful when copying lists or dictionaries in python: its 'name copying'
+- Be careful when copying lists or dictionaries in python: its 'name copying'. See [video on aliasing](http://software-carpentry.org/v4/python/alias.html) 
 
 
