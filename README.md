@@ -17,8 +17,9 @@ Stefan Wyder & Heidi Lischer
 5. Input and Output
 6. [Functions](Python_Tutorial_SW.md)
 7. [Libraries](Python_Tutorial_SW.md)
-8. [Tuples](Python_Tutorial_SW.md)
-9. [Slicing](Python_Tutorial_SW.md)
+8. [Dictionaries](Python_Tutorial_SW.md)
+9. [Tuples](Python_Tutorial_SW.md)
+10. [Sets](Python_Tutorial_SW.md)
 
 
 **Chapters 2-5 (Heidi)**   

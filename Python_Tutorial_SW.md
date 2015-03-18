@@ -7,32 +7,29 @@ Stefan Wyder
 
 ## Introduction to Python
 
-7. Functions
-8. Libraries
-9. Dictionaries
+6. Functions
+7. Libraries
+8. Dictionaries
 
-**Additional topics**
-10. Tuples
-11. Sets
-
-
-- [Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
+**Additional topics**  
+9. Tuples  
+10. Sets  
+- [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
 - Strings (Methods)
 
 
 
-## 7. Functions
+## 6. Functions
 
 Functions are little stand-alone programs that are called from within your own program
 
-We define new functions using `def`. Let's define a very simple function SquareNumber that returns the square of a number:
+We define new functions using `def`. Let's define a very simple function `SquareNumber` that returns the square of a number:
 
 ```python
 def SquareNumber(Number):
-    Squared = Number**2
+    Squared = Number ** 2
     return Squared
 ```
-  
   
 To call a function, we just use the function's name, followed by the arguments in parentheses:  
 `SquareNumber(4)` returns 16.  
@@ -44,7 +41,7 @@ If the current and global frames have variables with the same name, the one in t
 In other words, within a function you do not care 
 
 
-
+```python
 A function can have many `return`s
 def sign(num):
     if num > 0:
@@ -53,13 +50,17 @@ def sign(num):
 	   return 0
 	else:
 	   return -1
+```
 
-Like variables, in python functions don't have specific types.
 
+Like variables, in Python functions don't have specific types.
+
+```python
 def double(x):
    return 2 * x
-   
+```   
 
+  
 print double(2)
 4
 
@@ -90,9 +91,9 @@ Which one do you prefer?
 ```python
 for x in for range(1, GRID_WIDTH-1):
    for y in for range(1, GRID_HEIGHT-1):
-     if (density[x-1][y] > density_threshold) or \ if
+     if (density[x-1][y] > density_threshold) or \\ if
         (density[x+1][y] > density_threshold):
-        if (flow[x][y-1] < flow_threshold) or\ if
+        if (flow[x][y-1] < flow_threshold) or \\ if
            (flow[x][y+1] < flow_threshold):
            temp = (density[x-1][y] + density[x+1][y]) / 2
            if abs(temp - density[x][y]) > update_threshold: if
@@ -103,20 +104,20 @@ Or this one?
 ```python
 for x in for grid_interior(GRID_WIDTH):
    for y in for grid_interior(GRID_HEIGHT):
-      if density_exceeds(density, x, y, density_threshold): if
-         if flow_exceeds(flow, x, y, flow_threshold): if
+      if density_exceeds(density, x, y, density_threshold):
+         if flow_exceeds(flow, x, y, flow_threshold):
             update_on_tolerance(density, x, y, tolerance)
 ```
 
-Human short term memory can hold 7+-2 items. If somebody has to keep more than a dozen things in their mind at once to understand a block of code: break it into comprehensible pieces with functions
+Human short term memory can hold 7+-2 items. If somebody has to keep more than a dozen things in their mind at once to understand a block of code: break it into comprehensible pieces with functions.
 
-- Makes the code easier to read
+- Make the code easier to read
 - Avoid code duplication
 - One task, one function
 - Tell us what the function is doing, not how
 - Functions should not be longer than 60-100 lines
 
-Good programmers will write the scaffold and only then the functions it implies
+Good programmers will write first the scaffold and only then the functions it implies
 
 
 
@@ -126,19 +127,22 @@ Now we want to define a more useful function which accepts lower and uppercase c
 
 
 
-## 8. Libraries
+## 7. Libraries
 
 Only the very basic Python functionality is available out of the box. For more specialized tasks,
 we need to import additional functions bundled in **libraries** (aka modules or packages that are collections of modules).
 
+There are thousands of libraries available for every imaginable task: web development, databases, game development,
+image manipulation, system administration, ...
 
 Some important libraries often used in scientific computing:
 
 ![Scientific Ecosystem Python](EcosystemHomoScientificus.png)
 
-from Christian Elsaesser's course @UZH [<Scientific Programming with Python>](http://www.physik.uzh.ch/~python/python_2015-01/lecture4).
-
-
+from [Christian Elsaesser](http://www.physik.uzh.ch/~python/python_2015-01/lecture4))
+  
+  
+  
 Library  | Description  
 ---------------- | -------------
 math | Basic mathematical functions
@@ -159,13 +163,14 @@ tools for computational molecular biology (sequence analysis, Alignment, BLAST, 
 
 For R users: there is **pandas**, a rising star inspired by data.frames in R. 
 
-There are thousands of libraries available for every imaginable task: web development, databases, game development,
-image manipulation, system administration, ...
+
 
 
 ### Loading modules
 
-To use a module in a Python program it first has to be imported. A module (that is already installed on the system) is imported using the `import` statement. For example, to import the module math, which contains many standard mathematical functions, we do:
+To use a module in a Python program it needs to be installed on the system and has to be imported. We will talk about module installation in a later paragraph.
+
+A module is imported using the `import` statement. For example, to import the module math, which contains many standard mathematical functions, we do:
 ```python
 import math
 print math.log(40)
@@ -248,7 +253,7 @@ Linux package manager
 Anaconda: conda
 
 
-## 9. Dictionaries
+## 8. Dictionaries
 
 - Dictionary (also known as associative array, hash or map) is another type of container
 - Collection of names, or **keys**, with each key pointing to an associated **value**
@@ -307,13 +312,13 @@ If we are not sure whether a key is in a dictionary or not, we can test it:
 'Robbie' in PhoneNumbers
 ```
 ```html
-   <span="color:blue">False</span>
+   <style="color:blue"> False </style>
 ```
 ```python
 'Mary' in PhoneNumbers
 ```
 ```html
-   <span="color:blue">True</span>
+   <style="color:blue">True</style>
 ```
 
 Its often handy to combined dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
@@ -447,7 +452,7 @@ SortedValues = sorted(PhoneNumber.values())
 ```
 
 
-## 10. Tuples
+## 9. Tuples
 
 Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples from Software Carpentry. 
 
@@ -457,7 +462,7 @@ Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples
 names = ('John', 'Mary')
 ```
 
-## 11. Sets
+## 10. Sets
 
 - A **set** is an unordered collection of distinct values.
 - Their elements can't be modified after being added
