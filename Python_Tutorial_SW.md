@@ -7,10 +7,10 @@ Stefan Wyder
 
 ## Introduction to Python
 
-6 Functions
-7 Libraries
-8 Dictionaries
-9 Tuples
+6 Functions  
+7 Libraries  
+8 Dictionaries  
+9 Tuples  
 
 **Optional topics**    
 10 Sets  
@@ -83,9 +83,9 @@ Which one do you prefer?
 ```python
 for x in for range(1, GRID_WIDTH-1):
    for y in for range(1, GRID_HEIGHT-1):
-     if (density[x-1][y] > density_threshold) or \\ if
+     if (density[x-1][y] > density_threshold) or \ if
         (density[x+1][y] > density_threshold):
-        if (flow[x][y-1] < flow_threshold) or \\ if
+        if (flow[x][y-1] < flow_threshold) or \ if
            (flow[x][y+1] < flow_threshold):
            temp = (density[x-1][y] + density[x+1][y]) / 2
            if abs(temp - density[x][y]) > update_threshold: if
