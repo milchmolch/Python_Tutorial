@@ -15,11 +15,11 @@ Stefan Wyder & Heidi Lischer
 3. Control Flow
 4. Lists
 5. Input and Output
-6. [Functions](Python_Tutorial_SW.md)
-7. [Libraries](Python_Tutorial_SW.md)
-8. [Dictionaries](Python_Tutorial_SW.md)
-9. [Tuples](Python_Tutorial_SW.md)
-10. [Sets](Python_Tutorial_SW.md)
+6. [Functions](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
+7. [Libraries](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
+8. [Dictionaries](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
+9. [Tuples](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
+10. [Sets](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
 
 
 **Chapters 2-5 (Heidi)**   
@@ -33,7 +33,8 @@ Stefan Wyder & Heidi Lischer
 
 ### Some examples
 
-Nice Visualizations
+[Nice Visualizations](http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/)
+
 The future of analysis notebooks: IPython Notebooks
 Interactive Websites
 

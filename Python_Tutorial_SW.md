@@ -7,21 +7,21 @@ Stefan Wyder
 
 ## Introduction to Python
 
-6. Functions
-7. Libraries
-8. Dictionaries
+\6. Functions
+\7. Libraries
+\8. Dictionaries
+\9. Tuples
 
-**Additional topics**  
-9. Tuples  
+**Optional topics**    
 10. Sets  
-- [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
-- Strings (Methods)
+11. [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
+12. String Functions
 
 
 
 ## 6. Functions
 
-Functions are little stand-alone programs that are called from within your own program
+Functions are little stand-alone programs that are called from within your own program.
 
 We define new functions using `def`. Let's define a very simple function `SquareNumber` that returns the square of a number:
 
@@ -34,7 +34,9 @@ def SquareNumber(Number):
 To call a function, we just use the function's name, followed by the arguments in parentheses:  
 `SquareNumber(4)` returns 16.  
   
- 
+Function calls always have parentheses, if the function has no argument, with empty parentheses.
+
+
 A function can have many `return`s:
 ```python
 def sign(num):
@@ -47,27 +49,9 @@ def sign(num):
 ```
 
 
-Be aware that any variables that we create as part of the function only exist inside the function, and cannot be accessed outside (like in loops). 
+Be aware that any variables that we create as part of the function only exist inside the function, and cannot be accessed outside (which is also true in loops). 
 
 
-Like variables, in Python functions don't have specific types.
-
-```python
-def double(x):
-   return 2 * x
-```   
-
-```python
-print double(2)
-```
-4
-
-```python
-print double('hello')
-```
-hellohello
-
-In the first case, the function took an integer and returned an integer; in the second, it took a string and returned a string. Python's quite happy to do this...
 
 ### Default arguments
 
@@ -77,19 +61,23 @@ def adjust(value, amount=2.0):
   return value * amount
 ```
 
-If we call this function with one parameter, it is assigned to value, and 2.0 is used for amount
+If we call this function with one parameter, it is assigned to `value`, and 2.0 is used for `amount`
 ```python
 print adjust(5)
 ```
+```
 10
+```
 
-If we call it with two parameters, the second overrides the default for amount.
+If we call `adjust` with two parameters, the second overrides the default for `amount`.
 ```python
 print adjust(5, 1.001)
 ```
+```
 5.005
+```
 
-### Why do we write functions
+### Why do we write functions?
 
 Which one do you prefer?
 ```python
@@ -115,9 +103,10 @@ for x in for grid_interior(GRID_WIDTH):
 
 Human short term memory can hold 7+-2 items. If somebody has to keep more than a dozen things in their mind at once to understand a block of code: break it into comprehensible pieces with functions.
 
-- Make the code easier to read
-- Avoid code duplication
+- Makes the code easier to read
+- Avoids code duplication
 - One task, one function
+- Choose expressive names
 - Tell us what the function is doing, not how
 - Functions should not be longer than 60-100 lines
 
@@ -127,8 +116,10 @@ Good programmers will write first the scaffold and only then the functions it im
 
 ### Exercises
 
-Now we want to define a more useful function which accepts lower and uppercase codons.
-
+1. Convert your code from Heidi Lischers Exercise 1a into a function that returns the sum of 
+  the integers 1 + 2 + 3 + 4 .... + n
+2. Calculate the sum for n = 10, n = 100 and n = 1000.
+3. Make your script beautiful, choose expressive variable names, comment it. 
 
 
 ## 7. Libraries
@@ -182,7 +173,9 @@ A module is imported using the `import` statement. For example, to import the mo
 import math
 print math.log(40)
 ```
-*3.68887945411*  
+```
+3.68887945411 
+```
   
 Note that we to call the function using the `ModuleName.FunctionName` syntax.
 
@@ -192,7 +185,9 @@ A more convenient way if we need only 1 function is
 from math import log
 print log(40)
 ```
-*3.68887945411*
+```
+3.68887945411
+``` 
   
 Note that we called `log` directly.
   
@@ -202,8 +197,9 @@ We can also import a function under a different name (handy if two modules defin
 from math import log as ln
 print ln(40)
 ```
-*3.68887945411*
-
+```
+3.68887945411
+```
 
 We can also use `import *` to bring everything in the module into the current namespace at once. This is convenient but can be dangerous, however, ff someone adds a new function or variable to the next version of the module, that `import *` could silently overwrite something that you're importing from somewhere else, leading to a hard-to-find bug.
 
@@ -211,18 +207,30 @@ We can also use `import *` to bring everything in the module into the current na
 from math import *
 print log(40)
 ```
-*3.68887945411*
+```
+3.68887945411
+```
 
-### Installing modules
+### (optional) Installing modules
 
-With the exception of a few built-in modules (like os, sys, random) modules have to be installed on your system. 
+With the exception of a the built-in modules (like os, sys, random) third-party modules have to be installed on your system. 
+
+The way how modules are installed depends on the operation system and for each operating system there are several options. Check the [official documentation](https://docs.python.org/2/install/).
 
 
+#### Linux
 
-pipy
-easy_install
-Linux package manager
-Anaconda: conda
+Try first the package manager of your system, e.g. apt-get for Ubuntu. If the module can not be installed by the package manager try pip and/or easy_install.
+
+
+#### Mac computers
+
+from http://docs.python-guide.org/en/latest/starting/install/osx/
+
+Setuptools enables you to download and install any compliant Python software over a network (usually the Internet) with a single command (easy_install)
+
+pip is a tool for easily installing and managing Python packages, that is recommended over easy_install. It is superior to easy_install in several ways, and is actively maintained.
+
 
 ### Exercise
 
@@ -298,8 +306,9 @@ The contents of dictionaries can be modified
 PhoneNumbers['Mary'] = '123'
 print PhoneNumbers['Mary']
 ```
-*123*
-
+```
+123
+```
 
 There are several ways to create dictionaries. The most direct way is like this:
 ```
@@ -333,12 +342,16 @@ If we are not sure whether a key is in a dictionary or not, we can test it:
 ```python
 'Robbie' in PhoneNumbers
 ```
-*False*
+```
+False
+```
 
 ```python
 'Mary' in PhoneNumbers
 ```
-*True*
+```
+True
+```
 
 Its often convenient to combine dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
 of Tree measurements with particular sites.
@@ -450,8 +463,8 @@ resume operation of main commands
 You can loop through a dictionary using:
 
 ```python
-for person in PhoneNumber:
-    print person, PhoneNumber[person]
+for person in PhoneNumbers:
+    print person, PhoneNumbers[person]
 ```
 ```
 John 463673
@@ -464,23 +477,22 @@ The power of dict comes now from sorting: We can sort the keys and then retrieve
 
 
 ```python
-SortedKeys = sorted(PhoneNumber.keys())
+SortedKeys = sorted(PhoneNumbers.keys())
 ```
 
 We can then loop over the sorted keys using:
 
 ```python
 for PersonSorted in SortedKeys:
-    print SortedPerson, PhoneNumber[PersonSorted]
+    print SortedPerson, PhoneNumbers[PersonSorted]
 ```
 
-
-
-Alternativey, we can sort the values and then retreive the associated keys:
-
+Alternativey, we can sort the values and get sorted key-value pairs as a list:
 ```python
-SortedValues = sorted(PhoneNumber.values())
+SortedValues = sorted(PhoneNumbers.items())
 ```
+
+The sorting order can be changed using the `reverse=True` parameter.
 
 
 ## 9. Tuples
@@ -493,7 +505,7 @@ Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples
 names = ('John', 'Mary')
 ```
 
-## 10. Sets
+## (optional) 10. Sets
 
 - A **set** is an unordered collection of distinct values.
 - Their elements can't be modified after being added
@@ -518,6 +530,16 @@ set1.issuperset(setall) | set1 >= setall
 set1.symmetric_difference(set2) | set1 ^ set2
 set1.union(set2) | set1 \| setall
 
+
+## (optional) 11. String Functions
+
+Check the String Functions on the Quick Reference Sheet Python 2.7 (http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
+
+
+## (optional) 12. Slicing
+
+Watch the Repetition on Slicing [video](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
+
 ## Writing scripts
 
 1. Write the simplest version of code
@@ -534,19 +556,23 @@ Test with simple (simplified) made-up input file
 - [Software Carpentry v4](http://software-carpentry.org/v4/python/index.html)
 - [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org))
 
-- Quick Reference Sheet Python 2.7 (http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
 
 ## Learning more Python
 
+
+**Cheat Sheets**
+- Quick Reference Sheet Python 2.7 (http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
+
+
 **More exercises**
-[Interactive basic course with exercises](http://www.codecademy.com/courses/python-beginner-en-pwmb1)
-[Exercises (requires registration)](http://www.programmr.com/zone/python)
+- [Interactive basic course with exercises](http://www.codecademy.com/courses/python-beginner-en-pwmb1)
+- [Exercises (requires registration)](http://www.programmr.com/zone/python)
   
 **Other courses**
-[Python for Biologists (mostly sequence analysis)](http://pythonforbiologists.com/)
-[Dive into Python](http://diveintopython.org)
-[Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
-[Edx online course <introduction into computer science>: Interesting but time-consuming (90hrs):
+- [Python for Biologists (mostly sequence analysis)](http://pythonforbiologists.com/)
+- [Dive into Python](http://diveintopython.org)
+- [Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
+- [Edx online course <introduction into computer science>: Interesting but time-consuming (90hrs):
 (https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-0#.VNOMIGSG-PW)
 
 
@@ -566,18 +592,8 @@ temp = greet()
 
 ```
 
-### 3. Libraries
+Now we want to define a more useful function which accepts lower and uppercase codons.
 
-Import module sys and list the functions (methods) that are provided by it:
-
-Then in Spyder type 'os.', then a window open showing you all the available 
-
-- Try to find out which function to use to get the current working directory
-- Try to find out which function to use to create a new directory
-
-
-os.getcwd()
-os.mk
 
 
 
