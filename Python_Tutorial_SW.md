@@ -7,15 +7,15 @@ Stefan Wyder
 
 ## Introduction to Python
 
-\6. Functions
-\7. Libraries
-\8. Dictionaries
-\9. Tuples
+6 Functions
+7 Libraries
+8 Dictionaries
+9 Tuples
 
 **Optional topics**    
-10. Sets  
-11. [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
-12. String Functions
+10 Sets  
+11 [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
+12 String Functions
 
 
 
