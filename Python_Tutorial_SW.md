@@ -122,7 +122,7 @@ Good programmers will write first the scaffold and only then the functions it im
 3. Make your script beautiful, choose expressive variable names, comment it. 
 
 
-## 7. Libraries
+# 7. Libraries
 
 Only the basic Python functionality is available out of the box. For more specialized tasks,
 we need to import additional third-party functions bundled in **libraries** (aka modules or packages that are collections of modules).
@@ -164,7 +164,7 @@ For R users: there is **pandas**, a rising star inspired by data.frames in R.
 
 
 
-### Loading modules
+## Loading modules
 
 In order to use a module, it must both be installed on your computer and imported into your program. There are some built-in modules that come with Python, including `sys`, `os`, `math`, `random`, `time` (obtaining and converting dates and times), `re` (regular expressions).
 
@@ -211,19 +211,19 @@ print log(40)
 3.68887945411
 ```
 
-### (optional) Installing modules
+## (optional) Installing modules
 
 With the exception of a the built-in modules (like os, sys, random) third-party modules have to be installed on your system. 
 
 The way how modules are installed depends on the operation system and for each operating system there are several options. Check the [official documentation](https://docs.python.org/2/install/).
 
 
-#### Linux
+### Linux
 
 Try first the package manager of your system, e.g. apt-get for Ubuntu. If the module can not be installed by the package manager try pip and/or easy_install.
 
 
-#### Mac computers
+### Mac computers
 
 from http://docs.python-guide.org/en/latest/starting/install/osx/
 
@@ -232,7 +232,7 @@ Setuptools enables you to download and install any compliant Python software ove
 pip is a tool for easily installing and managing Python packages, that is recommended over easy_install. It is superior to easy_install in several ways, and is actively maintained.
 
 
-### Exercise
+## Exercise
 
 Import the module math and list the functions (methods) that are provided by it:
 
@@ -240,7 +240,7 @@ Then in Spyder type 'math.', then a window open showing you all the available
 
 - Check for a few functions what they are doing using the help page
 
-### (Optional) Command-line arguments
+## (Optional) Command-line arguments
 
 Copy the following lines and save them as `test_argv.py` using spyder.
 
@@ -275,7 +275,7 @@ If you make extensive use of command-line options have a look into the modules `
 Every Python file can be used as a library by other programs.
 
 
-### Exercise
+## Exercise
 
 Writing a module is very easy.
 
@@ -293,7 +293,7 @@ def sign(num):
 Then write another script that imports sign.py and uses the sign function for printing the sign for [-8, -1, 0, 1, 6].
 
 
-## 8. Dictionaries
+# 8. Dictionaries
 
 - Dictionary (also known as associative array, hash or map) is another type of container
 - Collection of names, or **keys**, with each key pointing to an associated **value**
@@ -394,9 +394,9 @@ In summary, dictionaries are more flexible than lists: In a dictionary, you can 
 Importantly, dictionaries provide efficient lookup.
 
 
-### Important dictionary functions
+## Important dictionary functions
 
-#### The .get() function
+### The .get() function
 
 allows to extract values from a dictionary but with a default value to be returned if the entry doesn't exist.
 
@@ -407,17 +407,17 @@ codon_table.get('atg'])
 codon_table.get('atg'], 0)
 ```
 
-#### The .keys() function
+### The .keys() function
 
 Extracts a list of the keys in a dictionary. Remember that there is no intrinsic order to the keys or values in a dictionary.
 
 
-#### The .values() function
+### The .values() function
 
 Extracts a list of the values in a dictionary. Remember that there is no intrinsic order to the keys or values in a dictionary .
 
 
-#### Listing keys and values
+### Listing keys and values
 
 In Python pseudocode is similar to an if statement:
 
@@ -439,7 +439,7 @@ John 463673
 Mary 279943
 ```
 
-#### Sorting
+### Sorting
 
 The power of dict comes now from sorting: We can sort the keys and then retrieve the associated values in a particular order.
 
@@ -463,7 +463,7 @@ SortedValues = sorted(PhoneNumbers.items())
 The sorting order can be changed using the `reverse=True` parameter.
 
 
-### Exercise: Codon Table
+## Exercise: Codon Table
 
 We have a dictionary codon_table containing the codon table, it will look up the amino acid
 encoded by the codon. 
@@ -493,7 +493,7 @@ For instance, `print codon_table['ATG']` will print out 'M'
 :bulb: Make a second dictionary with reversed key-values
 
 
-### Exercise: Counting insects
+## Exercise: Counting insects
 
 This is a script you found on the internet. Run it and try to understand it.
 
@@ -527,7 +527,7 @@ for name in count:
 
 
 
-## 9. Tuples
+# 9. Tuples
 
 Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples from Software Carpentry. 
 
@@ -537,7 +537,7 @@ Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples
 names = ('John', 'Mary')
 ```
 
-## (optional) 10. Sets
+# (optional) 10. Sets
 
 - A **set** is an unordered collection of distinct values.
 - Their elements can't be modified after being added
@@ -563,16 +563,18 @@ set1.symmetric_difference(set2) | set1 ^ set2
 set1.union(set2) | set1 \| setall
 
 
-## (optional) 11. String Functions
+# (optional) 11. String Functions
 
 Check the String Functions on the Quick Reference Sheet Python 2.7 (http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
 
 
-## (optional) 12. Slicing
+# (optional) 12. Slicing
 
 Watch the Repetition on Slicing [video](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
-
-## Some tips how to write scripts
+  
+  
+  
+# Some tips how to write scripts
 
 1. Write the simplest version of code
 2. Refactor (remove duplication, reorganize the code)
@@ -583,13 +585,13 @@ Test the script with simple (simplified) made-up input file
 
 
 
-## Sources
+# Sources
 
 - [Software Carpentry v4](http://software-carpentry.org/v4/python/index.html)
 - [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org))
 
 
-## Learning more Python
+# Learning more Python
 
 
 **Cheat Sheets**
