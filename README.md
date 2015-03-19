@@ -74,7 +74,6 @@ Spyder is a MATLAB-like IDE for scientific computing with python. It has many ni
 - Organize your scripts as projects (File | New Project...)
 
 
-
 ### Getting help
 
 - the built-in help() function (e.g `help(round)`) and pydoc are often not very helpful
@@ -225,16 +224,10 @@ More interesting IPython Notebooks:
 
 ### Some differences between R and python
 
-- In python calculations / batch modification on a list do **not** work as in R, e.g. MyList = range(0,5); MyList * 2
-To process the list element-by-element as in R, we need a `for` loop (or numpy).
-```python
-[Val**2 for Val in range(0, 10)]
-Squares = [Val**2 for Val in MyList]
-```
+Many participants know R, therefore I collected some differences between R and python. Beware, the list is not complete.
+
 
 - In R, variable names can contain special characters "." and "_", whereas in python only "_" is allowed.
-
-- Be careful when copying lists or dictionaries in python: its 'name copying'. See [video on aliasing](http://software-carpentry.org/v4/python/alias.html) 
 
 - In Python, an integer division will give an **integer** result
 ```
@@ -246,3 +239,12 @@ To prevent unexpected results either make sure that at least one value is a real
 ```python
 from __future__ import division
 ```
+
+- In python calculations / batch modification on a list do **not** work as in R, e.g. MyList = range(0,5); MyList * 2
+To process the list element-by-element as in R, we need a `for` loop (or numpy).
+```python
+[Val**2 for Val in range(0, 10)]
+Squares = [Val**2 for Val in MyList]
+```
+
+- Be careful when copying lists or dictionaries in python like NewDict = OldDict: its 'name copying'. See e.g. [video on aliasing](http://software-carpentry.org/v4/python/alias.html) 

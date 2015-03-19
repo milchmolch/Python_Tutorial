@@ -253,7 +253,7 @@ Run the script with a command line argument, e.g. `python test_argv.py 4`. Run i
 Observe what is happening. 
 
 
-\#CountLines.py
+\\#CountLines.py
 ```python
 import sys
 
@@ -270,9 +270,27 @@ else:
 print LineCount
 ```
 
-If you make extensive use of command-line options have a look into the module `argparse`.
+If you make extensive use of command-line options have a look into the modules `argparse` and `getopt`.
 
-Every Python file can be used as a library by other programs
+Every Python file can be used as a library by other programs.
+
+
+### Exercise
+
+Writing a module is very easy.
+
+Paste the code for the function `sign` from above into a file sign.py 
+```python
+def sign(num):
+    if num > 0:
+	   return 1
+	elif num == 0
+	   return 0
+	else:
+	   return -1
+```
+
+Then write another script that imports sign.py and uses the sign function for printing the sign for [-8, -1, 0, 1, 6].
 
 
 ## 8. Dictionaries
@@ -298,7 +316,7 @@ We extract values from the dictionary using square brackets []
 ```python
 print PhoneNumbers['Mary']
 ```
-would print out Mary's phone number `279943`.
+prints out Mary's phone number `279943`.
 
 
 The contents of dictionaries can be modified
@@ -325,7 +343,10 @@ In this example, the keys are strings, and the values are strings.
 ```python
 PhoneNumbers = {
 	'John':'463673',
-	'Mary':'279943' }
+	'Mary':'279943',
+    'William':'393493',
+    'Bob':'236333', 
+	'Linda':'976866', }
 ```
 is also valid, and often helps to make long list/dictionary entries more readible.
 
@@ -353,78 +374,25 @@ False
 True
 ```
 
-Its often convenient to combine dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
-of Tree measurements with particular sites.
+It is often convenient to combine dictionaries and lists, making a dictionary of lists. For instance, you could associate lists
+of contact data with particular persons.
 
 ```python
-TreeStat = {}
-TreeStat['Kodiak'] = [68, 57.8, -152.5]
-TreeStat['Juneau'] = [73, 48.7, -134.2]
-TreeStat['Barrow'] = [13, 52.5, -156.5]
+Contacts = {}
+\\# [PhoneNumber, City, Street, YearOfBirth] 
+Contacts['John'] = ['463673', 'Zurich', 1984]
+Contacts['Mary'] = ['279943', 'Paris', 1983]
+Contacts['William'] = ['393493', 'London', 1990]
 ```
 
-Dictionaries are more flexible than lists: In a dictionary, you can create an entry e.g. for key 16 without having any data corresponding to keys 0 to 15. This lets you fill in data as they become known.
+You can also have a dictionary of dictionaries.
+  
+  
+  
+In summary, dictionaries are more flexible than lists: In a dictionary, you can create an entry e.g. for key 16 without having any data corresponding to keys 0 to 15. This lets you fill in data as they become known.
 
 Importantly, dictionaries provide efficient lookup.
 
-### Exercise: Codon Table
-
-We have a dictionary codon_table containing the codon table, it will look up the amino acid
-encoded by the codon. 
-
-```python
-codon_table = {
-    'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M', 'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
-    'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K', 'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',
-    'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L', 'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
-    'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q', 'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
-    'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V', 'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
-    'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E', 'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
-    'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S', 'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
-    'TAC':'Y', 'TAT':'Y', 'TAA':'*', 'TAG':'*', 'TGC':'C', 'TGT':'C', 'TGA':'*', 'TGG':'W'}
-```
-
-For instance, `print codon_table['ATG']` will print out 'M'
-
-
-1. Write a script that prints out the protein sequence encoded by the DNA 'GTGCGGCCACCT'
-2. Convert it into a function (if you did not write it as a function)
-3. Improve it by allowing lower case letters, check that all letters are valid codons, ... 
-4. Make a count table how many codons encode the same amino acid
-5. Write a backtranslator (protein -> DNA)
-
-
-
-### Exercise: Counting birds
-
-
-
-```python
-\# CountInsects.py
-import sys
-
-def count_names(lines):
-  '''Count unique lines of text, returning dictionary.'''
-
-  result = {}                   # Create an empty directionary to fill
-  for name in lines:            # Handle input values one at a time
-     name = name.strip()
-     if name in result:     # If we have seen this name before...
-            result[name] = result[name] + 1    # add one to its count
-     else:                                      # If it is the first time we see that name
-            result[name] = 1
-
-  return result
-
-
-reader = open(sys.argv[1], 'r')
-lines = reader.readlines()
-reader.close()
-\# Count distinctive values
-count = count_names(lines)
-for name in count:
-   print name, count[name]  
-```
 
 ### Important dictionary functions
 
@@ -495,6 +463,70 @@ SortedValues = sorted(PhoneNumbers.items())
 The sorting order can be changed using the `reverse=True` parameter.
 
 
+### Exercise: Codon Table
+
+We have a dictionary codon_table containing the codon table, it will look up the amino acid
+encoded by the codon. 
+
+```python
+codon_table = {
+    'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M', 'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
+    'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K', 'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',
+    'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L', 'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
+    'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q', 'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
+    'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V', 'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
+    'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E', 'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
+    'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S', 'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
+    'TAC':'Y', 'TAT':'Y', 'TAA':'*', 'TAG':'*', 'TGC':'C', 'TGT':'C', 'TGA':'*', 'TGG':'W'}
+```
+
+For instance, `print codon_table['ATG']` will print out 'M'
+
+
+1. Write a script that prints out the protein sequence encoded by the DNA 'GTGCGGCCACCT'
+2. Convert it into a function (if you did not write it as a function)
+3. Make your script safer by also allowing both upper and lower case letters, check that only valid letters occur, ...
+:bulb: Use the Cheat Sheet to find out which string function to use for converting letters to  
+4. Make a count table how many codons encode the same amino acid
+6. Print out a sorted count table
+7. Write a backtranslator (protein -> DNA)
+:bulb: Make a second dictionary with reversed key-values
+
+
+### Exercise: Counting insects
+
+This is a script you found on the internet. Run it and try to understand it.
+
+
+```python
+\\# CountInsects.py
+import sys
+
+def count_names(lines):
+  '''Count unique lines of text, returning dictionary.'''
+
+  result = {}                   # Create an empty directionary to fill
+  for name in lines:            # Handle input values one at a time
+     name = name.strip()
+     if name in result:     # If we have seen this name before...
+            result[name] = result[name] + 1    # add one to its count
+     else:                                      # If it is the first time we see that name
+            result[name] = 1
+
+  return result
+
+
+reader = open(sys.argv[1], 'r')
+lines = reader.readlines()
+reader.close()
+\\# Count distinctive values
+count = count_names(lines)
+for name in count:
+   print name, count[name]  
+```
+
+
+
 ## 9. Tuples
 
 Watch the [video](http://software-carpentry.org/v4/python/tuples.html) on tuples from Software Carpentry. 
@@ -540,14 +572,14 @@ Check the String Functions on the Quick Reference Sheet Python 2.7 (http://www.a
 
 Watch the Repetition on Slicing [video](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
 
-## Writing scripts
+## Some tips how to write scripts
 
 1. Write the simplest version of code
 2. Refactor (remove duplication, reorganize the code)
 3. If speed or memory are an issue: Optimize only at this point
 
 
-Test with simple (simplified) made-up input file
+Test the script with simple (simplified) made-up input file
 
 
 
@@ -561,8 +593,8 @@ Test with simple (simplified) made-up input file
 
 
 **Cheat Sheets**
-- Quick Reference Sheet Python 2.7 (http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
-
+- [Quick Reference Sheet Python 2.7](http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
+- [CheatSheet from Practical Computing Biologists](http://practicalcomputing.org/files/PCfB_Appendices.pdf)
 
 **More exercises**
 - [Interactive basic course with exercises](http://www.codecademy.com/courses/python-beginner-en-pwmb1)
@@ -575,26 +607,3 @@ Test with simple (simplified) made-up input file
 - [Edx online course <introduction into computer science>: Interesting but time-consuming (90hrs):
 (https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-0#.VNOMIGSG-PW)
 
-
-
-### To do 
-
-### 1. IDE
-
-Open the script in Spyder
-Run it
-Which type has variable 'XXX'?
- 
-### 2. Functions
-
-
-temp = greet()
-
-```
-
-Now we want to define a more useful function which accepts lower and uppercase codons.
-
-
-
-
-### 4. Dictionaries
