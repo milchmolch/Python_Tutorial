@@ -5,7 +5,7 @@ Stefan Wyder
 
 
 
-## Introduction to Python
+# Introduction to Python
 
 6 Functions  
 7 Libraries  
@@ -14,12 +14,12 @@ Stefan Wyder
 
 **Optional topics**    
 10 Sets  
-11 [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)
+11 [Repetition on Slicing](http://software-carpentry.org/v4/python/slice.html) (Access of lists, strings, tuples)  
 12 String Functions
 
 
 
-## 6. Functions
+# 6. Functions
 
 Functions are little stand-alone programs that are called from within your own program.
 
@@ -53,7 +53,7 @@ Be aware that any variables that we create as part of the function only exist in
 
 
 
-### Default arguments
+## Default arguments
 
 We can define default values. The function `adjust` has a required argument `value` and an optional argument `amount`: 
 ```python
@@ -77,7 +77,7 @@ print adjust(5, 1.001)
 5.005
 ```
 
-### Why do we write functions?
+## Why do we write functions?
 
 Which one do you prefer?
 ```python
@@ -114,7 +114,7 @@ Good programmers will write first the scaffold and only then the functions it im
 
 
 
-### Exercises
+## Exercises
 
 1. Convert your code from Heidi Lischers Exercise 1a into a function that returns the sum of 
   the integers 1 + 2 + 3 + 4 .... + n
