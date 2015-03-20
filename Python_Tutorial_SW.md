@@ -42,7 +42,7 @@ A function can have many `return`s:
 def sign(num):
     if num > 0:
 	   return 1
-	elif num == 0
+	elif num == 0:
 	   return 0
 	else:
 	   return -1
@@ -290,7 +290,7 @@ def sign(num):
 	   return -1
 ```
 
-Then write another script that imports sign.py and uses the sign function for printing the sign for [-8, -1, 0, 1, 6].
+write another script that imports sign.py (`import sign`) and uses the sign function for printing the sign for [-8, -1, 0, 1, 6].
 
 
 # 8. Dictionaries
@@ -402,9 +402,9 @@ allows to extract values from a dictionary but with a default value to be return
 
 ```python
 codon_table['atg']
-codon_table.get('atg'])
+codon_table.get('atg')  # is the same
 
-codon_table.get('atg'], 0)
+codon_table.get('atg', 0)
 ```
 
 ### The .keys() function
@@ -483,19 +483,21 @@ codon_table = {
 For instance, `print codon_table['ATG']` will print out 'M'
 
 
-1. Write a script that prints out the protein sequence encoded by the DNA 'GTGCGGCCACCT'
+1. Write a script that prints out the protein sequence encoded by the DNA 'GTGCGGCCACCT'. Print out the position,the codon and the growing amino acid sequence
 2. Convert it into a function (if you did not write it as a function)
 3. Make your script safer by also allowing both upper and lower case letters, check that only valid letters occur, ...
 :bulb: Use the Cheat Sheet to find out which string function to use for converting letters to  
 4. Make a count table how many codons encode the same amino acid
-6. Print out a sorted count table
-7. Write a backtranslator (protein -> DNA)
+5. Print out a sorted count table
+6. Write a backtranslator (protein -> DNA)
 :bulb: Make a second dictionary with reversed key-values
 
 
 ## Exercise: Counting insects
 
-This is a script you found on the internet. Run it and try to understand it.
+1. The following script you found on the internet. Try to understand it. How does the input file to be formatted?
+2. Make up an input file and run the script.
+3. Modify the script so that it reads in only the second column of each line.
 
 
 ```python
@@ -606,6 +608,6 @@ Test the script with simple (simplified) made-up input file
 - [Python for Biologists (mostly sequence analysis)](http://pythonforbiologists.com/)
 - [Dive into Python](http://diveintopython.org)
 - [Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
-- [Edx online course <introduction into computer science>: Interesting but time-consuming (90hrs):
-(https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-0#.VNOMIGSG-PW)
+- [Edx online course <introduction into computer science>](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-0#.VNOMIGSG-PW): Interesting but time-consuming (90hrs):
+
 

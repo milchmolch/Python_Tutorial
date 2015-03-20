@@ -103,12 +103,6 @@ dir(sys)
 
 - [Quick Reference Sheet Python 2.7](http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
 
-## Learning more Python
-
-[Scientific Programming with Python: 4-day course @ UZH](http://www.physik.uzh.ch/~python/python_2015-01/programme.php)
-programmingforbiologists.com
-
-
 
 ## Installation Instructions
 
