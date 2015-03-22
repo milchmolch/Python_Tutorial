@@ -38,7 +38,6 @@ Stefan Wyder & Heidi Lischer
 The future of analysis notebooks: IPython Notebooks
 Interactive Websites
 
-
 http://localhost:8888/notebooks/anaconda/Examples/bokeh/charts/charts.ipynb#
 http://localhost:8888/notebooks/anaconda/Examples/bokeh/plotting/notebook/color_scatterplot.ipynb#
 
@@ -175,7 +174,31 @@ Use the 'launcher' in the folder 'anaconda' to launch Ipython, Notebooks or Spyd
 Windows lacks a good package manager. Download [Anaconda Python v2.7](http://continuum.io/downloads). Anaconda already comprises the most popular Python packages for science, math, engineering, data analysis. With the Anaconda environment you also get [conda](http://conda.pydata.org/docs/) to install/manage different versions of libraries and modules. With Anaconda you can also have 2 or more different version of python simultaneously.
 
 
-### IPython Notebooks
+## Installing modules
+
+With the exception of a the built-in modules (like os, sys, random) third-party modules have to be installed on your system. 
+
+The way how modules are installed depends on the operation system and for each operating system there are several options. Usually the best way is first to check the package manager of the system (homebrew/fink/MacPort for Mac computers, apt-get for Ubuntu Linux). Check also the [official documentation](https://docs.python.org/2/install/).
+
+Alternatively, you can install [Anaconda Python v2.7](http://continuum.io/downloads)
+Anaconda already comprises the 200 most popular Python packages for science, math, engineering, data analysis.
+
+### Linux
+
+Try first the package manager of your system, e.g. apt-get for Ubuntu. If the module can not be installed by the package manager try pip and/or easy_install.
+
+
+### Mac computers
+
+from http://docs.python-guide.org/en/latest/starting/install/osx/
+
+Setuptools enables you to download and install any compliant Python software over a network (usually the Internet) with a single command (easy_install)
+
+pip is a tool for easily installing and managing Python packages, that is recommended over easy_install. It is superior to easy_install in several ways, and is actively maintained.
+
+
+
+## IPython Notebooks
 
 
 - [IPython Interactive Demo](http://www.nature.com/news/ipython-interactive-demo-7.21492?article=1.16261) from Nature

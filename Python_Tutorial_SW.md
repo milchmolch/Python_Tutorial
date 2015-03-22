@@ -215,21 +215,12 @@ print log(40)
 
 With the exception of a the built-in modules (like os, sys, random) third-party modules have to be installed on your system. 
 
-The way how modules are installed depends on the operation system and for each operating system there are several options. Check the [official documentation](https://docs.python.org/2/install/).
+The way how modules are installed depends on the operation system and for each operating system there are several options. Usually the best way is first to check the package manager of the system (homebrew/fink/MacPort for Mac computers, apt-get for Ubuntu Linux). Check also the [official documentation](https://docs.python.org/2/install/).
 
+You find detailed hints on the [start page](README.md) of this python tutorial.
 
-### Linux
-
-Try first the package manager of your system, e.g. apt-get for Ubuntu. If the module can not be installed by the package manager try pip and/or easy_install.
-
-
-### Mac computers
-
-from http://docs.python-guide.org/en/latest/starting/install/osx/
-
-Setuptools enables you to download and install any compliant Python software over a network (usually the Internet) with a single command (easy_install)
-
-pip is a tool for easily installing and managing Python packages, that is recommended over easy_install. It is superior to easy_install in several ways, and is actively maintained.
+Alternatively, you can install [Anaconda Python v2.7](http://continuum.io/downloads)
+Anaconda already comprises the 200 most popular Python packages for science, math, engineering, data analysis.
 
 
 ## Exercise
