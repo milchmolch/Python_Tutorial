@@ -433,23 +433,30 @@ Mary 279943
 ### Sorting
 
 The power of dict comes now from sorting: We can sort the keys and then retrieve the associated values in a particular order.
-
+After sorting, we get back a sorted list as dictionaries are unordered. 
 
 ```python
 SortedKeys = sorted(PhoneNumbers.keys())
 ```
 
-We can then loop over the sorted keys using:
+We can then loop over the sorted keys using (we don't have to write the `.keys()`):
 
 ```python
 for PersonSorted in SortedKeys:
     print SortedPerson, PhoneNumbers[PersonSorted]
 ```
 
-Alternativey, we can sort the values and get sorted key-value pairs as a list:
+To get a list containing sorted values we do:
 ```python
-SortedValues = sorted(PhoneNumbers.items())
+SortedValues = sorted(PhoneNumbers.values())
 ```
+
+If we need the key-value pairs sorted by values it is a bit more complicated:
+```python
+SortedValuesAsPairs = sorted(PhoneNumbers.items(), key=lambda x: x[1])
+```
+Again we are getting back a list.
+
 
 The sorting order can be changed using the `reverse=True` parameter.
 
