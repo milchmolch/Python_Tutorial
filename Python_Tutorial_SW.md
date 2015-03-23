@@ -487,8 +487,8 @@ For instance, `print codon_table['ATG']` will print out 'M'
 :bulb: Use the Cheat Sheet to find out which string function to use for converting letters to  
 4. Make a count table how many codons encode the same amino acid
 5. Print out a sorted count table
-6. Write a backtranslator (protein -> DNA)
-:bulb: Make a second dictionary with reversed key-values
+6. Write a backtranslator (protein -> DNA). Make up an example amino sequence, backtranslate it into DNA and 
+translate it again into a protein (Using the function you wrote above).
 
 
 ## Exercise: Counting insects
