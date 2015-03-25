@@ -98,7 +98,7 @@ dir(sys)
 ## Sources
 
 - [Software Carpentry v4](http://software-carpentry.org/v4/python/index.html)
-- [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org))
+- [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org)
 
 - [Quick Reference Sheet Python 2.7](http://www.astro.up.pt/~sousasag/Python_For_Astronomers/Python_qr.pdf)
 

@@ -134,7 +134,7 @@ def TranslateDNA(dna):
    return aaSeq
 ```
 
-3. Make your script safer by also allowing both upper and lower case letters, check that only valid letters occur, the length of the DNA sequence is a multiple of 3...
+3. Make your script safer by also allowing both upper and lower case letters, check that only valid letters occur, the length of the DNA sequence is a multiple of 3...  
 :bulb:
 Use the Cheat Sheet to find out which string function to use for converting letters to  
 
@@ -170,7 +170,8 @@ def SafeTranslateDNA(dna):
 4. Make a count table of how many codons encode the same amino acid
 
 ```python
-\# Prints out number of different codons encoding the same amino acid 
+\# Prints out number of different codons encoding the same amino acid
+
 
 codon_table = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M', 'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
@@ -223,16 +224,41 @@ sorted_codon_count = sorted(codon_count.items(), key=lambda x: x[1], reverse=Tru
 
 for ele in sorted_codon_count:
     print ele[0], ele[1]
-
-
 ```
 
-6. Write a backtranslator (protein -> DNA)
+6. Write a backtranslator (protein -> DNA). Make up an example amino sequence, backtranslate it into DNA and 
+translate it again into a protein (Using the function you wrote above).  
+  
 :bulb:
 Make a second dictionary with reversed key-values
 
 ```python
+\# Backttranslates an amino acid sequence
 
+codon_table = {
+    'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M', 'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
+    'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K', 'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',
+    'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L', 'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
+    'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q', 'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
+    'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V', 'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
+    'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E', 'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
+    'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S', 'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
+    'TAC':'Y', 'TAT':'Y', 'TAA':'_', 'TAG':'_', 'TGC':'C', 'TGT':'C', 'TGA':'_', 'TGG':'W'}
+
+rev_codon_table = {}
+
+for codon in codon_table:
+    aa = codon_table[codon]
+    rev_codon_table[aa] = codon
+
+
+aa_seq = 'VRPP'
+nt_seq = ''
+
+for aa in aa_seq:
+    nt_seq += rev_codon_table[aa]
+
+print nt_seq
 ```
   
 

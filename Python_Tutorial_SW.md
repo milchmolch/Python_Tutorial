@@ -275,7 +275,7 @@ Paste the code for the function `sign` from above into a file sign.py
 def sign(num):
     if num > 0:
 	   return 1
-	elif num == 0
+	elif num == 0:
 	   return 0
 	else:
 	   return -1
@@ -296,8 +296,8 @@ write another script that imports sign.py (`import sign`) and uses the sign func
 
 ```python
 PhoneNumbers = {}     				# Create an empty dictionary 
-PhoneNumbers['John'] = ['463673']
-PhoneNumbers['Mary'] = ['279943']
+PhoneNumbers['John'] = '463673'
+PhoneNumbers['Mary'] = '279943'
 ```
 
 True to the dictionary analogy, values in dictionaries are looked up according to their keys, rather than by their position 
