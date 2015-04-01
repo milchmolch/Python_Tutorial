@@ -10,6 +10,8 @@ Stefan Wyder & Heidi Lischer
 ## Introduction to Python
 
 
+###Day 1###
+
 1. Introduction (Why Python?)
 2. Basics
 3. Control Flow
@@ -21,9 +23,16 @@ Stefan Wyder & Heidi Lischer
 9. [Tuples](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
 10. [Sets](Python_Tutorial_SW.md) | [Solutions](Solutions_Python.md) 
 
-
 **Chapters 2-5 (Heidi)**   
 [Theory](URPP_Tutorial_Python_HL.pdf) | [Exercises](Exercises_Python_Tutorial_HL.pdf) | [Data](Python_Data_HL.zip)
+
+
+###Day 2###
+
+11. Object-Oriented Programming
+12. [BioPython](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
+13. [Regular Expressions](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
+
 
 **Installation Instructions** and some **IPython Notebook examples** at the end of this document.
 
