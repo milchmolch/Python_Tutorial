@@ -114,11 +114,11 @@ Record gi|16132220|ref|NP_418820.1|, length 228
 #### Exercises
 1. Count how many sequences are less than 100 amino acids long.
 2. Write a script which only prints out 1 sequence provided as a command line argument.  
-This is a frequent task.  
+Extracting a sequence from a large fasta file is a frequent task. 
 Tip: use `sys.argv` to get the sequence name.
 3. (Optional) Plot a histogram of the sequence length distribution.  
 For plotting you can use either Python's [`pylab` module](http://matplotlib.org/examples/index.html) or you save the result into a file and use R. 
-4. (Advanced) Modify your script from (2.) so that it reads in a file containing sequences of interest (One sequence per line).
+
 
 ### Looking at the sequence 
 
@@ -161,11 +161,6 @@ PGSC0003DMP400011481 starts Y
 
 Found 208 records in PGSC_DM_v3.4_pep_representative.fasta which did not start with M
 ```
-
-#### Exercise
-Modify this script to print out the description of the problem records, not just the identifier. Tip: Try reading the documentation, e.g. Biopython's wiki page on the [SeqRecord](http://biopython.org/wiki/SeqRecord).
-
-
 
 ### Different File Formats
 
@@ -224,10 +219,12 @@ GCGATGATTGAAAAAACCATTAGCGGCCAGGATGCTTTACCCAATATCAGCGATGCCGAA
 
 
 There is also a handy helper function to convert a file:
-```python
+```
 >>> from Bio import SeqIO
 >>> help(SeqIO.convert)
 ```
+
+
 
 The `SeqIO.convert()` function is effectively a shortcut combining `SeqIO.parse()` for input and `SeqIO.write()` for output.
 
@@ -239,7 +236,7 @@ We'll be doing this in the next example, where we call `SeqIO.write()` several t
 
 The simplest solution is to open and close the file explicitly, using a file handle. The `SeqIO` functions are happy to work with either filenames (strings) or file handles, and this is a case where the more low-level handle is useful.
 
-Here's a working version of the script, save this as `length_filter.py`:
+Here's a working version of the script, save this as `filter_length.py`:
 ```python
 from Bio import SeqIO
 input_filename = "NC_000913.faa"
@@ -255,9 +252,9 @@ for record in SeqIO.parse(input_filename, "fasta"):
 output_handle.close()
 print(str(count) + " records selected out of " + str(total))
 ```
-This time we get the expected output - and it is much faster (needlessly creating and replacing several thousand small files is slow):
+We get the expected output:
 ```
-$ python length_filter.py
+$ python filter_length.py
 3720 records selected out of 4141
 $ grep -c "^>" NC_000913_long_only.faa
 3720
@@ -302,7 +299,11 @@ $ python filter_wanted_id.py
 
 **Advanced Exercise:** Modify this to read the list of wanted identifiers from a plain text input file (one identifier per line).
 
-**Discussion:** What happens if a wanted identifier is not in the input file? What happens if an identifer appears twice? What order is the output file?
+**Discussion:** What happens if a wanted identifier is not in the input file? If some idetifiers contain trailing whitespaces? What happens if an identifer appears twice? What order is the output file?
+
+When we write a program we also have to think what could go wrong. Good programs print out a warnings. 
+
+**Exercise:**  Check what [additional methods](http://biopython.org/DIST/docs/_api_159/Bio.SeqUtils-module.html) are available for `Bio.Seq` objects and write a program which uses at least one.
 
 ### Working with Sequence Features
 
@@ -417,8 +418,8 @@ The `Bio.Graphics` module can plot chromosome and karyogram plots with annotatio
 
 - Genome organization of a Bacterium [(publication)](doi:10.1007/s10482-009-9316-9)
 
-<img src="VanDerAuweraFig1.gif" style="width: 300px;"/>
-<img src="VanDerAuweraFig2.gif" style="width: 400px;"/>
+<img src="VanDerAuweraFig1.gif" style="width: 200px;"/>
+<img src="VanDerAuweraFig2.gif" style="width: 200px;"/>
 
 - Locations of tRNA genes in the Arabidopsis*genome.
 
@@ -444,101 +445,29 @@ You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tu
 - Installation using easy_install  
 easy_install -f http://biopython.org/DIST/ biopython
 
+- pypi
 
-
-
-The SeqIO.parse function was creating SeqRecord objects
-
-Biopython's SeqRecord objects are a container holding the sequence, and any annotation about it - most importantly the identifier.
-
-why file handles
-
-
-\#or curl for Mac
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.gbk
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.fna
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.ffn
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa
-http://potato.plantbiology.msu.edu/data/PGSC_DM_v3.4_pep_representative.fasta.zip
-
-
-
-from http://fenyolab.org/presentations/Introduction_Biostatistics_Bioinformatics_2014/pdf/homework2.pdf
-Bioinformatics data is heavy on strings (sequences) and various types of tab delimited tables,
+- Summary  
+  - Bioinformatics data is heavy on strings (sequences) and various types of tab delimited tables,
 as well as some key:value pairs such as GenBank records (field header: field contents). There
 are also some complex data structures such as multiple alignments, phylogenetic trees, etc.
 BioPython is a collection of Python modules that provide functions to deal with Bioinformatics
 data types and functions for useful computing operations (reverse complement a DNA string,
 find motifs in protein sequences, access web servers, etc.) as well as ‘wrappers’ that provide
 interfaces to run other software (both via webservers and installed on your local computer) and
-work with the output.
+work with the output.from http://fenyolab.org/presentations/Introduction_Biostatistics_Bioinformatics_2014/pdf/homework2.pdf
+  - The SeqIO.parse function is creating SeqRecord objects
+  - Biopython's SeqRecord objects are a container holding the sequence, and any annotation about it - most importantly the identifier.
 
+\#or curl for Mac  
+- wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.gbk
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.fna
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.ffn
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa
+http://potato.plantbiology.msu.edu/data/PGSC_DM_v3.4_pep_representative.fasta.zip
 
-In [147]: dir(blast_records.alignments[0])
-Out[147]: 
-['__class__',
- '__delattr__',
- '__dict__',
- '__doc__',
- '__format__',
- '__getattribute__',
- '__hash__',
- '__init__',
- '__module__',
- '__new__',
- '__reduce__',
- '__reduce_ex__',
- '__repr__',
- '__setattr__',
- '__sizeof__',
- '__str__',
- '__subclasshook__',
- '__weakref__',
- 'accession',
- 'hit_def',
- 'hit_id',
- 'hsps',
- 'length',
- 'title']
+why file handles
 
 
 
 
-
-dir(hsp)
-Out[146]: 
-['__class__',
- '__delattr__',
- '__dict__',
- '__doc__',
- '__format__',
- '__getattribute__',
- '__hash__',
- '__init__',
- '__module__',
- '__new__',
- '__reduce__',
- '__reduce_ex__',
- '__repr__',
- '__setattr__',
- '__sizeof__',
- '__str__',
- '__subclasshook__',
- '__weakref__',
- 'align_length',
- 'bits',
- 'expect',
- 'frame',
- 'gaps',
- 'identities',
- 'match',
- 'num_alignments',
- 'positives',
- 'query',
- 'query_end',
- 'query_start',
- 'sbjct',
- 'sbjct_end',
- 'sbjct_start',
- 'score',
- 'strand']

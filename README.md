@@ -32,7 +32,7 @@ Stefan Wyder & Heidi Lischer
 11. Object-Oriented Programming
 12. [BioPython](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
 13. [Regular Expressions](RegularExpressions.md) | [Solutions](Solutions_RegExp.md)
-
+14. [Programming Exercises](ProgrammingExercises_SW.md)
 
 **Installation Instructions** and some **IPython Notebook examples** at the end of this document.
 
