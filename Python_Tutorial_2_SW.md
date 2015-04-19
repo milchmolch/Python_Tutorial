@@ -9,23 +9,19 @@ Stefan Wyder
 
 # Introduction to Python
 
-6 BioPython  
-7 Regular expressions
+
+# BioPython
 
 
+Chapters organized like in [BioPython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
 
-## Download files
- 
-to be added
+**Heidi**  
+1  Introduction  
+2  What can you do with Biopython?  
+3  Sequence objects  
+4  Sequence annotation objects  
 
-
-# 6. BioPython
-
-
-chapters organized like in [BioPython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
-
-1-4 Heidi
-
+**Stefan**  
 5  Sequence Input/Output  
 6  Multiple Sequence Alignment objects  
 7  BLAST  
@@ -33,6 +29,11 @@ chapters organized like in [BioPython tutorial](http://biopython.org/DIST/docs/t
 (Genbank, Medline, GEO, Unigene)  
 10  Swiss-Prot and ExPASy  
 16  Graphics including GenomeDiagram
+
+
+## Download files
+ 
+to be added
 
 
 ## 6.5 Sequence Input/Output
@@ -321,24 +322,80 @@ If you are interested in Multiple Alignments you can have a look at Peter's [wor
 ## 6.7 Blast
 
 
-BLAST can be run with BioPython either from using the command line tools -- provided they are installed -- or through the web. In this section, we use the qblast from the Bio.Blast.NCBIWWW module to call the online version of BLAST. Note that the results would be the same if we were to use the command line tools. As pointed out from the qblast documentation, there are three required arguments:
+BLAST can be run with BioPython either from using the command line tools -- provided they are installed -- or through the web. In this section, we use the qblast from the `Bio.Blast.NCBIWWW` module to call the online version of BLAST. Note that the results would be the same if we were to use the command line tools. As pointed out from the qblast documentation, there are three required arguments:
 
-The first argument is the blast program to use for the search, as a lower case string. The options and descriptions of the programs are available at http://www.ncbi.nlm.nih.gov/BLAST/blast_program.shtml. Currently qblast only works with blastn, blastp, blastx, tblast and tblastx.
-The second argument specifies the database in which to perform the search. Again, the options for this are available on the NCBI web pages at http://www.ncbi.nlm.nih.gov/BLAST/blast_databases.shtml.
-The third argument is a string containing your query sequence. This can either be the sequence itself, the sequence in fasta format, or an identifier like a GI number.
+The *first argument* is the blast program to use for the search, as a lower case string. The options and descriptions of the programs are available at http://www.ncbi.nlm.nih.gov/BLAST/blast_program.shtml. Currently qblast only works with blastn, blastp, blastx, tblast and tblastx.
+The *second argument* specifies the database in which to perform the search. Again, the options for this are available on the NCBI web pages at http://www.ncbi.nlm.nih.gov/BLAST/blast_databases.shtml.
+The *third argument* is a string containing your query sequence. This can either be the sequence itself, the sequence in fasta format, or an identifier like a GI number.
+
+
+
+```python
+from Bio.Blast import NCBIWWW, NCBIXML
+seq = "ataccaggctgaggcccattaatgatgcaatttgctgggcttctctattttctccgtgcttccatcctcttctccgtcggcggggagaagtgaaatgccgtggagatgggcggcggcggcggcgacggcggcgacgagaaagctcaccgggatctctcagtcgcgagtttcagtagcctttaccggccgtcttctctaccgctcgttcggaagcgactccagtgaaagccgcaagaggtcactgccacggggggtcgtatcgatcggggccatcagccttgctggaggtctcgtgctcagcgccgtcaacgacctcgccatcttcaatggatgcacaacgaaggcaattgagcatgctgctgacaaccctgctgttgtggaagcaattggagtgcctatagtcagaggaccgtggtatgatgcttctcttgaggtgggccatcgacggcggtctgtgtcatgcacattccctgtatctgggccacatgggtcaggatttctccagattaaggcaacccgagatggagaggatggtctgctttcgtttctgcggcatcacgactggaagatcctattgctggaggctcatcttgaagcaccatcagatgatgaggaccagagaaagctggttaaggtgaatcttgcaagcagtggccgtggggaagatggggatccagagagtggttaatcttttgtactgaattccatggtgagtggaagatcgtgtcatctgaatggactccaaatattaaatgacatggagatctagggaagcaaaaaaaaaaaaaaaa"
+E_VALUE_THRESH = 0.01
+s_len = 100
+
+result_handle = NCBIWWW.qblast("blastn", "nt", seq) 
+blast_records = NCBIXML.read(result_handle) 
+
+for alignment in blast_records.alignments[:5]:
+    for hsp in alignment.hsps: 
+        if hsp.expect < E_VALUE_THRESH: 
+            print "****Alignment****"
+            print "sequence:", alignment.title 
+            print "length:", alignment.length 
+            print "gaps:", hsp.gaps
+            print "e value:", hsp.expect 
+            print hsp.query[0:s_len] + "..." 
+            print hsp.match[0:s_len] + "..." 
+            print hsp.sbjct[0:s_len] + "..."
+```
+
+The (shortened) output looks like:
+```
+python Remote_blast.py
+****Alignment****
+sequence: gi|226505045|ref|NM_001150016.1| Zea mays uncharacterized LOC100276165 (LOC100276165), mRNA >gi|195621403|gb|EU960414.1| Zea mays clone 224719 hypothetical protein mRNA, complete cds
+length: 791
+gaps: 0
+e value: 0.0
+ATACCAGGCTGAGGCCCATTAATGATGCAATTTGCTGGGCTTCTCTATTTTCTCCGTGCTTCCATCCTCTTCTCCGTCGGCGGGGAGAAGTGAAATGCCG...
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||...
+ATACCAGGCTGAGGCCCATTAATGATGCAATTTGCTGGGCTTCTCTATTTTCTCCGTGCTTCCATCCTCTTCTCCGTCGGCGGGGAGAAGTGAAATGCCG...
+…
+…
+****Alignment****
+sequence: gi|149391396|gb|EF576128.1| Oryza sativa (indica cultivar-group) clone V-E12 unknown mRNA
+length: 752
+gaps: 0
+e value: 1.77484e-78
+AAGAGGTCACTGCCACGGGGGGTCGTATCGATCGGGGCCATCAGCCTTGCTGGAGGTCTCGTGCTCAGCGCCGTCAACGACCTCGCCATCTTCAATGGAT...
+|||||||||| |   ||| || |||| ||||| ||||  |||||| | ||||| ||  ||| ||| |||||| |||||||||| || || ||| ||||||...
+AAGAGGTCACGGATCCGGAGGATCGTGTCGATTGGGGTTATCAGCATCGCTGGCGGCGTCGCGCTTAGCGCCCTCAACGACCTTGCTATATTCCATGGAT...
+```
 
 
 The default output format for qblast is XML.
 
+Note that the default settings on the NCBI BLAST website are not quite the same as the defaults on QBLAST. If you get different results, you’ll need to check the parameters (e.g. the expectation value threshold and the gap values).
 
-Web blast queries take relatively long.  Local BLAST allows you to search a custom database, or use a very large query. Installing ncbi-blast is straight-forward on Ubuntu:
+**Exercise:** Find out the attributes of alignments and hsps.
+
+You can learn more about running BLAST and parsing its results in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
+
+
+### Running BLAST locally
+
+Web blast queries are relatively slow.  Local BLAST allows you to use a very large query, or to search a custom database. Installing ncbi-blast is straight-forward on Linux, e.g. with Ubuntu:
 
 ```
 sudo apt-get install ncbi-blast+
 ```
 installs blastn, blastp, blastx,… in your path.
 
-Blast binaries can be downloaded from [here](http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download).
+Alternatively, Blast binaries can be downloaded from [here](http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download).
+
 
 ## 6.8. NCBI's Entrez databases
 
@@ -346,9 +403,9 @@ Blast binaries can be downloaded from [here](http://blast.ncbi.nlm.nih.gov/Blast
 
 ![image](NCBI_databases.png)
 
-Entrez (http://www.ncbi.nlm.nih.gov/Entrez) is a data retrieval system that provides users access to NCBI’s databases such as PubMed, GenBank, GEO, and many others. You can access Entrez from a web browser to manually enter queries, or you can use Biopython’s Bio.Entrez module for programmatic access to Entrez. The latter allows you for example to search PubMed or download GenBank records from within a Python script.
+Entrez (http://www.ncbi.nlm.nih.gov/Entrez) is a data retrieval system that provides users access to NCBI’s databases such as PubMed, GenBank, GEO, and many others. You can access Entrez from a web browser to manually enter queries, or you can use Biopython’s `Bio.Entrez` module for programmatic access to Entrez. The latter allows you for example to search PubMed or download GenBank records from within a Python script.
 
-The Bio.Entrez module makes use of the Entrez Programming Utilities (also known as EUtils), consisting of eight tools that are described in detail on NCBI’s page at http://www.ncbi.nlm.nih.gov/entrez/utils/. Each of these tools corresponds to one Python function in the Bio.Entrez module, as described in the sections below. This module makes sure that the correct URL is used for the queries, and that not more than one request is made every three seconds, as required by NCBI.
+The `Bio.Entrez` module makes use of the Entrez Programming Utilities (also known as EUtils), consisting of eight tools that are described in detail on NCBI’s page at http://www.ncbi.nlm.nih.gov/entrez/utils/. Each of these tools corresponds to one Python function in the Bio.Entrez module, as described in the sections below. This module makes sure that the correct URL is used for the queries, and that not more than one request is made every three seconds, as required by NCBI.
 
 You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
 
@@ -369,307 +426,26 @@ The `Bio.Graphics` module can plot chromosome and karyogram plots with annotatio
 
 You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
 
-# 7. Regular Expressions
-
-
-check also http://www.dalkescientific.com/writings/NBN/
-
-## Introduction
-
-Regular expressions (aka regex or regexp or RE) is a tiny programming language to describe sets of strings, a sort of pattern.
-
-A first example: count the number of fasta sequences in a file (fast & safe):
-```
-grep -c "^>" file.fa
-```
-
-Regular expressions often provide a safer (and faster) way of searching than a simple text search.
-
-
-They can be used for several things:
-
-- Powerful search and replace function
-- Extract information
-- Format checking
-
-
-Here we practise regular expressions using python. We could also use the shell (grep/egrep, sed, awk), R, any other programming language and even many text editors and OpenOffice.
-
-## Simple Patterns
-
-The easiest regular expression is a literal string. For example, the regular expression `test` will match the string `test` exactly.
-
-
-In python, we first have to load the built-in module `re`:  
-```python
-import re
-```
-
-The basic format is (query being a regular expression):
-```python
-Results = re.search(query, string)
-```
-  
-```python  
-re.sub("thaliana", "lyrata", MyString)
-'Arabidopsis lyrata'
-```
-
-The same could have been achieved with the `replace()` function, as we did simple string replacement: `MyString.replace("thaliana", "lyrata")`.
-
-  
-Let's start with a simple example. We define a regular expression `MyRe` putting the letter r immediately before the opening quotation mark:
-```python
-MyRe = r"(\w)(\w+)"
-```
-
-The pattern `MyRe` captures 2 strings as indicated by the pair of brackets (1. the first letter, and 2. all the rest) counting from left to right.
-
-Now we search our regular expression in the string `Arabidopsis thaliana`:
-```python
-MyString = "Arabidopsis thaliana"
-MyResult = re.search(MyRe, MyString)
-```
-We could have done `MyResult = re.search(MyRe, "Arabidopsis thaliana")` directly which gives the same result.
-
-
-```python
-All matches together
-MyResult.group(0)
-'Arabidopsis'
-```
-
-Now we can get the first captured match (first pair of brackets)
-```python
-MyResult.group(1)
-'A'
-```
-
-And the second captured match (second pair of brackets)
-```python
-The second captured match
-MyResult.group(2)
-'rabidopsis'
-```
-
-
-##Functions that use regular expressions
-
--------------------|----------------
-Function | |    
-re.sub(query, replacement, string) | Make *all* substitutions in a string  
-search(query, string) | Extract some value  
-re.search() | Detect the presence of a pattern
-re.match() |  Like re.search but only if pattern matches the entire string
-re.split() | Split a string according to a pattern
-
-
-##Replacing text / Substitution
-
-re.sub() is for replacing text. Its arguments are <pattern> (the regular expression), <repl(acement)> (the substitution pattern) and <string> (the string to work on).
-
-The simplest regular expression pattern are just literal characters:
-
-MyString = "23rd May 2000"
-re.sub("May", "July", MyString)
-[1] "23rd July 2014"
-
-
-sub() replaces all occurences. Hence here we remove any space
-
-re.sub(" ", "", " Hello World ")
-'HelloWorld'
-
-But we can replace a maximum number of occurences using  the `count` argument:
-re.sub(" ", "", " Hello World ", 1)
-'Hello World '
-
-re.sub(" ", "", " Hello World ", 2)
-'HelloWorld '
-
-re.sub(" ", "", " Hello World ", 3)
-'HelloWorld'
-
-
-Regular expressions have much more abilities. Here we use a regular expression to only keep the 3 digits after the comma.
-
->>> re.sub(r"(\d+\.\d{3})\d+", r"\1", "34.73322532")
-'34.733'
-
-re.sub(r"(\d+)\w{2} (\w+) (\d+)", r"\2 \1 \3", "23rd May 2015")
-'May 23 2015'
-
-
-
-
-> regexp <- "([[:digit:]]{2}) ([[:alpha:]]+) ([[:digit:]]{4})"
-> sub(pattern = regexp, replacement = "\\1", x = string)
-<!---->\# returns the first part of the regular expression
-[1] "23"
-> sub(pattern = regexp, replacement = "\\2", x = string)
-<!---->\# returns the second part
-[1] "mai"
-> sub(pattern = regexp, replacement = "\\3", x = string)
-<!---->\# returns the third part
-[1] "2000"
-
-In the above simple example we could also use strsplit() to split the character vector into substrings separated by " ".
-> strsplit(string, split=" ")
-[[1]]
-[1] "23" "mai" "2000"
-
-
-##Escape special characters ‘$ * + . ? [ ] ^ { } | ( ) \
-
-If you look for a meta-character ‘$ * + . ? [ ] ^ { } | ( ) \’, precede them with a backslash. As they have a double meaning we need '\' to interpret them as ordinary characters.
-
-In Arabidopsis, isoforms of a gene X are called like X.1, X.2, X.3. Sometimes we need a list of genes which we can achieve using a regular expression. We have It even works with X.11 or X.100.
-
-
-```python
-> sub(pattern = "([^\\.]+)\\.[[:digit:]]", replacement = "\\1", x = "AT5G11100.3")
-[1] "AT5G11100"
-sub(pattern = "([^\\.]+)\\.[0123456789]", replacement = "\\1", x = "AT5G11100.3")
-[1] "AT5G11100"
-sub(pattern = "([A-z0-9]+).[0-9]", replacement = "\\1", x = "AT5G11100.3", perl=T)
-[1] "AT5G11100"
-```
-
-There are often many different ways to write a working regular expression. With [] we can define our own character class. The ^ in square brackets means that it will match any character except the one written. Thus [^\\.] means any character but a dot. This way is a safe way to capture everything until the first dot.
-
-
-##Finding text
-
-grep() tells you whether a regular expression matches the input string x. If it matches it returns 1 and if it does not match integer(0).
-
-grep(pattern = "21", x = "21 Aug 2014")
-[1] 1
-> grep(pattern = "\\d{2} \\w+ \\d{4}", x = "21 Aug 2014")
-[1] 1
-> grep(pattern = "\\d{2} \\w+ \\d{4}", x = "hello")
-integer(0)
-
-##Format Checking
-
-Regular expressions are often used to check correct formatting. We want to check whether a string is correctly formatted doing grepl:
-
-> grepl(pattern = "\\d{2} \\w+ \\d{4}", x = "21 Aug 2014")
-[1] TRUE
-
-or, alternatively, in a more expressive notation:
-> grepl(pattern = "[[:digit:]]{2} [[:alpha:]]+ [[:digit:]]{4}", x = "21 Aug 2014")
-[1] TRUE
-
-The following one is false since there is only one digit in the first number in x:
-> grepl(pattern = "\\d{2} \\w+ \\d{4}", x = "1 Aug 2014")
-[1] FALSE
-
-grepl tells us that the pattern/regexp is matching our string. Here we check a single string, but x could also be a vector containing many elements. grepl will return a logical vector telling us for each element of the vector whether it math
-
-
-regexpr() and gregexpr() are more verbose versions of grep(). In addition to the position of the match (counting from left) they also return the length of the match. -1 is the result if the regexp does not match at all. Again, regexpr() only returns the first occurrence whereas gregexpr() returns all occurences.
-
-> regexp <- "([[:digit:]]{2}) ([[:alpha:]]+) ([[:digit:]]{4})"
-> string <- "blabla 23 mai 2000 blabla 18 mai 2004"
-> regexpr(pattern = regexp, text = string)
-[1] 8
-attr(,"match.length")
-[1] 11
-attr(,"useBytes")
-[1] TRUE
-> gregexpr(pattern = regexp, text = string)
-[[1]]
-[1] 8 27
-attr(,"match.length")
-[1] 11 11
-attr(,"useBytes")
-[1] TRUE
-
-
-##Splitting
-
-s = "a 1 and 2 and 3 and 4"
-a = re.split("\d", s) # every number is a delimiter
-a
-['a ', ' and ', ' and ', ' and ', '']
-
-
-##Summary
-
-- case-sensitive! (but see IGNORECASE flag)
-
-
-## Application in Bioinformatics
-
-Regular expressions are used a lot for data mangling (format conversion). Furthermore, regular expressions are often used for parsing, e.g. if you want to extract information from a BLAST report (e.g. the Sequence ID and the the E-value). Regular expressions can also be used to identify Sequence motifs (e.g. to search for a motif with 3 basic amino acids across 5 positions).
-
-- protein domains
-- DNA transcription factor binding motifs
-- restriction enzyme cut sites
-- degenerate PCR primer sites
-- runs of mononucleotides
-- read mapping locations
-
-### Final Comment
-
-
-Trial and error: Sometimes regular expressions do not behave as expected. In case of difficulties try to start simple, test parts of the regular expression and combine them once the subparts work. Often it also helps to do two rounds of replacements. Another level of complication is that there are 2 different types of regular expression, in R the default are 'extended regular expressions' (perl=FALSE) but there are also Perl-like regular expressions (perl=TRUE) that look different from the default type. It is easy to confuse them. Last, there unfortunately also differences between languages so that sometimes we have to find the correct version by trial and error.
-
-
-##Exercise
-
-1. Modify some of the input strings and patterns/regular expression and check whether they produce the expected results. You can e.g. add additional text to the input string or remove parts of the regexp.
-2. Try out the 2 online tools (url given below). Choose the one that appeals most to you.
-Develop a regexp to remove the noninformative parts of sample names: X20120401_Wyderrun31_1367.05.1_05.RCC
-X20120401_Wyderrun31_1482.05.1_08.RCC
-
-grep -v "^>" reference_transcriptome.fa | grep --color "[^AGCT]" | more
-
-import re
-
-\# This string contains HTML.
-v = """<p id=x>Sometimes, <b>simpler</b> is better,
-but <i>not</i> always.</p>"""
-
-\# Replace HTML tags with an empty string.
-result = re.sub("<.*?>", "", v)
-print(result)
-
-
 
 # Sources
 
-- [Regular Expression HOWTO (Python doc)](https://docs.python.org/2/howto/regex.html#regex-howto)
-- [Software Carpentry v4](http://software-carpentry.org/v4/regexp/index.html)
-- [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org))
-- [Python for Biologists](http://pythonforbiologists.com/index.php/introduction-to-python-for-biologists/regular-expressions/)
+- [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
+- [Peter Cock's workshop on Biopython](https://github.com/peterjc/biopython_workshop)
 
 # Links
 
-**Biopython**
+- Biopython [wiki](http://biopython.org/wiki/), e.g. page on [SeqIO](http://biopython.org/wiki/SeqIO)
 
-[Short Tutorial (interactive notebook)](http://nbviewer.ipython.org/github/gditzler/bio-course-materials/blob/master/notebooks/BioPython-Tutorial.ipynb)
+- [Short Tutorial (interactive notebook)](http://nbviewer.ipython.org/github/gditzler/bio-course-materials/blob/master/notebooks/BioPython-Tutorial.ipynb)
 
-**Online tools to try regular expressions**  
-- [http://regex101.com/](http://regex101.com/)   
-- [http://www.regexr.com/](http://www.regexr.com/)   
-- [https://www.debuggex.com/](https://www.debuggex.com/)  
 
-**Cheat Sheets**  
-- [CheatSheet from Practical Computing Biologists](http://practicalcomputing.org/files/PCfB_Appendices.pdf)
+# ideas / to add
 
-**Regular Expression in other languages**  
-- [in R](http://en.wikibooks.org/wiki/R_Programming/Text_Processing#Functions_which_use_regular_expressions_in_R)  
-- [using sed](http://www.grymoire.com/Unix/Sed.html#uh-4)
-
-# ideas / to do
-
+- Installation using easy_install  
 easy_install -f http://biopython.org/DIST/ biopython
 
-http://www.drive5.com/muscle/downloads.htm
 
 
-Bio.SeqIO wiki page (http://biopython.org/wiki/SeqIO)
 
 The SeqIO.parse function was creating SeqRecord objects
 
@@ -696,3 +472,73 @@ data types and functions for useful computing operations (reverse complement a D
 find motifs in protein sequences, access web servers, etc.) as well as ‘wrappers’ that provide
 interfaces to run other software (both via webservers and installed on your local computer) and
 work with the output.
+
+
+In [147]: dir(blast_records.alignments[0])
+Out[147]: 
+['__class__',
+ '__delattr__',
+ '__dict__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__module__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ 'accession',
+ 'hit_def',
+ 'hit_id',
+ 'hsps',
+ 'length',
+ 'title']
+
+
+
+
+
+dir(hsp)
+Out[146]: 
+['__class__',
+ '__delattr__',
+ '__dict__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__module__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ 'align_length',
+ 'bits',
+ 'expect',
+ 'frame',
+ 'gaps',
+ 'identities',
+ 'match',
+ 'num_alignments',
+ 'positives',
+ 'query',
+ 'query_end',
+ 'query_start',
+ 'sbjct',
+ 'sbjct_end',
+ 'sbjct_start',
+ 'score',
+ 'strand']

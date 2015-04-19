@@ -31,7 +31,7 @@ Stefan Wyder & Heidi Lischer
 
 11. Object-Oriented Programming
 12. [BioPython](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
-13. [Regular Expressions](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
+13. [Regular Expressions](RegularExpressions.md) | [Solutions](Solutions_RegExp.md)
 
 
 **Installation Instructions** and some **IPython Notebook examples** at the end of this document.
@@ -188,6 +188,9 @@ Windows lacks a good package manager. Download [Anaconda Python v2.7](http://con
 With the exception of a the built-in modules (like os, sys, random) third-party modules have to be installed on your system. 
 
 The way how modules are installed depends on the operation system and for each operating system there are several options. Usually the best way is first to check the package manager of the system (homebrew/fink/MacPort for Mac computers, apt-get for Ubuntu Linux). Check also the [official documentation](https://docs.python.org/2/install/).
+
+M
+sudo python setup.py install
 
 Alternatively, you can install [Anaconda Python v2.7](http://continuum.io/downloads)
 Anaconda already comprises the 200 most popular Python packages for science, math, engineering, data analysis.
