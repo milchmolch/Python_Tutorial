@@ -1,6 +1,8 @@
 # URPP Tutorials
 ## URPP Evolution in Action
 
+![URPP logo](Logo_URPP_Kreisganz_kl2.png)
+
 Stefan Wyder
 
 
@@ -12,18 +14,24 @@ Stefan Wyder
 
 
 
+## Download files
+ 
+to be added
+
 
 # 6. BioPython
 
 
 chapters organized like in [BioPython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
 
-5  Sequence Input/Output
-6  Multiple Sequence Alignment objects
-7  BLAST
-9  Accessing NCBI's Entrez databases
-(Genbank, Medline, GEO, Unigene)
-10  Swiss-Prot and ExPASy
+1-4 Heidi
+
+5  Sequence Input/Output  
+6  Multiple Sequence Alignment objects  
+7  BLAST  
+9  Accessing NCBI's Entrez databases  
+(Genbank, Medline, GEO, Unigene)  
+10  Swiss-Prot and ExPASy  
 16  Graphics including GenomeDiagram
 
 
@@ -35,16 +43,15 @@ https://github.com/peterjc/biopython_workshop) on Biopython.
   
   
   
-Dealing with assorted sequence file formats is one of the strengths of Biopython. The primary module we'll be using is Bio.SeqIO, which is short for sequence input/output (following the naming convention set by BioPerl's SeqIO module).
+Dealing with assorted sequence file formats is one of the strengths of Biopython. The primary module we'll be using is `Bio.SeqIO`, which is short for sequence input/output (following the naming convention set by BioPerl's `SeqIO` module).
 
-For these examples we're going to use files for the famous bacteria Esherichia coli K12 (from the NCBI FTP server)
+For these examples we're going to use files for the famous bacteria Escherichia coli K12 (from the NCBI FTP server).
 
-#### Download files
- 
+
 
 ### Counting records
 
-We'll start by looking at the protein sequence in the FASTA amino acid file, NC_000913.faa. First take a quick peek using head to look at the start of the file (in the shell):
+We'll start by looking at the protein sequence in the FASTA amino acid file, NC_000913.faa. First take a quick peek using `head` to look at the start of the file (in the shell):
 
 ```
 $ head NC_000913.faa
@@ -60,7 +67,7 @@ QSSSEYSISFCVPQSDCVRAERAMQEEFYLELKEGLLEPLAVTERLAIISVVGDGMRTLRGISAKFFAAL
 ARANINIVAIAQGSSERSISVVVNNDDATTGVRVTHQMLFNTDQVIEVFVIGVGGVGGALLEQLKRQQSW
 ```
 
-Now let's count the records with Biopython using the SeqIO.parse function. Paste the following lines into a file `count_fasta.py`:
+Now let's count the records with Biopython using the `SeqIO.parse` function. Paste the following lines into a file `count_fasta.py`:
 
 ```python
 from Bio import SeqIO
@@ -71,7 +78,7 @@ for record in SeqIO.parse(filename, "fasta"):
 print("There were " + str(count) + " records in file " + filename)
 ```
 
-Have a look at the [SeqIO entry](http://biopython.org/wiki/SeqIO) in the Biopython wiki. As always you can also get help on the `SeqIO.parse` function using `help(SeqIO.parse)`.
+Have a look at the [SeqIO entry](http://biopython.org/wiki/SeqIO) in the Biopython wiki. As always you can also get help on the `SeqIO.parse` function using `help(SeqIO.parse)` or, in IPython, using `SeqIO.parse?`
 
 ### Looking at the records
 
@@ -86,8 +93,9 @@ from Bio import SeqIO
 filename = "NC_000913.faa"
 for record in SeqIO.parse(filename, "fasta"):
     print("Record " + record.id + ", length " + str(len(record.seq)))
-Notice that given a SeqRecord object we access the identifer as record.id and the sequence object as record.seq. As a shortcut, len(record) gives the sequence length, len(record.seq).
 ```
+Notice that given a `SeqRecord` object we access the identifer as `record.id` and the sequence object as `record.seq`. As a shortcut, `len(record)` gives the sequence length, `len(record.seq)`.
+
 
 If you save that as `record_lengths.py` and run it you'll get over four thousand lines of output:
 
@@ -104,22 +112,23 @@ Record gi|16132220|ref|NP_418820.1|, length 228
 
 #### Exercises
 1. Count how many sequences are less than 100 amino acids long.
-2. (Advanced) Write a script which only prints out 1 sequence provided as a command line argument.  
-This is a frequent task. Tip: use sys.argv to get the sequence name
-3. (Advanced) Modify your script that it reads in a filename containing sequences of interest.
-4. (Optional) Plot a histogram of the sequence length distribution.  
-You can use either Python plotting `pylab` or use R (by saving as a file and loading it into R). 
+2. Write a script which only prints out 1 sequence provided as a command line argument.  
+This is a frequent task.  
+Tip: use `sys.argv` to get the sequence name.
+3. (Optional) Plot a histogram of the sequence length distribution.  
+For plotting you can use either Python's [`pylab` module](http://matplotlib.org/examples/index.html) or you save the result into a file and use R. 
+4. (Advanced) Modify your script from (2.) so that it reads in a file containing sequences of interest (One sequence per line).
 
 ### Looking at the sequence 
 
-The record identifiers are very important, but more important still is the sequence itself. In the SeqRecord objects the identifiers are stored as standard Python strings (e.g. .id). For the sequence, Biopython uses a string-like Seq object, accessed as .seq.
+The record identifiers are very important, but more important still is the sequence itself. In the `SeqRecord` objects the identifiers are stored as standard Python strings (e.g. `.id`). For the sequence, Biopython uses a string-like `Seq` object, accessed as `.seq`.
 
-In many ways the Seq objects act like Python strings, you can print them, take their length using the len(...) function, and slice them with square brackets to get a sub-sequence or a single letter.
+In many ways the Seq objects act like Python strings, you can print them, take their length using the `len()` function, and slice them with square brackets to get a sub-sequence or a single letter.
 
 
 #### Checking proteins start with methionine
 
-In the next example we'll check all the protein sequences start with a methionine (represented as the letter "M" in the standard IUPAC single letter amino acid code), and count how many records fail this. Let's create a script called check_start_met.py:
+In the next example we'll check all the protein sequences start with a methionine (represented as the letter "M" in the standard IUPAC single letter amino acid code), and count how many records fail this. Let's create a script called `check_start_met.py`:
 
 ```python
 from Bio import SeqIO
@@ -148,6 +157,7 @@ PGSC0003DMP400011427 starts Q
 PGSC0003DMP400068739 starts E
 ...
 PGSC0003DMP400011481 starts Y
+
 Found 208 records in PGSC_DM_v3.4_pep_representative.fasta which did not start with M
 ```
 
@@ -158,7 +168,7 @@ Modify this script to print out the description of the problem records, not just
 
 ### Different File Formats
 
-So far we've only been using FASTA format files, which is why when we've called `SeqIO.parse(…)` the second argument has been "fasta". The Biopython `SeqIO` module supports quite a few other important sequence file formats (see the table on the [SeqIO wiki page](http://biopython.org/wiki/SeqIO).
+So far we've only been using FASTA format files, which is why when we've called `SeqIO.parse()` the second argument has been `"fasta"`. The Biopython `SeqIO` module supports quite a few other important sequence file formats (see the table on the [SeqIO wiki page](http://biopython.org/wiki/SeqIO).
 
 If you work with finished genomes, you'll often see nicely annotated files in the EMBL or GenBank format. Let's try this with the E. coli K12 GenBank file, NC_000913.gbk, based on the previous example:
 
@@ -172,41 +182,29 @@ gi|556503834|ref|NC_000913.3| length 4641652
 NC_000913.3 length 4641652
 ```
 
-All we needed to change was the file format argument to the `SeqIO.read(…)` function - and we could load a GenBank file instead. You'll notice the GenBank version was given a shorter identifier, and took longer to load. The reason is that there is a lot more information present - most importantly lots of features (where each gene is and so on). We'll return to this in a later section, working with sequence features.
+All we needed to change was the file format argument to the `SeqIO.read()` function - and we could load a GenBank file instead. You'll notice the GenBank version was given a shorter identifier, and took longer to load. The reason is that there is a lot more information present - most importantly lots of features (where each gene is and so on). We'll return to this in a later section, working with sequence features.
 
 ### Writing Sequences Files in Biopython
 
-The previous section talked about reading sequence files in Biopython using the `SeqIO.parse(…)` function. Now we'll focus on writing sequence files using the sister function `SeqIO.write(…)`.
+Now we'll focus on writing sequence files using the function `SeqIO.write()`.
 
 #### Converting a sequence file
 
 Recall we looked at the E. coli K12 chromosome as a FASTA file `NC_000913.fna` and as a GenBank file `NC_000913.gbk`. Suppose we only had the GenBank file, and wanted to turn it into a FASTA file?
 
-Biopython's `SeqIO` module can read and write lots of sequence file formats, and has a handy helper function to convert a file:
-
-```python
->>> from Bio import SeqIO
->>> help(SeqIO.convert)
-```
-
-Here's a very simple script which uses this function:
+Biopython's `SeqIO` module can read and write lots of sequence file formats:
 
 ```python
 from Bio import SeqIO
 input_filename = "NC_000913.gbk"
 output_filename = "NC_000913_converted.fasta"
-count = SeqIO.convert(input_filename, "gb", output_filename, "fasta")
+records_iterator = SeqIO.parse(input_filename, "gb")
+count = SeqIO.write(records_iterator, output_filename, "fasta")
 print(str(count) + " records converted")
 ```
+Previously we'd always used the results from `SeqIO.parse()` in a for loop - but here the for loop happens inside the `SeqIO.write()` function.
 
-Save this as convert_gb_to_fasta.py and run it:
-```
-$ python convert_gb_to_fasta.py
-1 records converted
-```
-
-Notice that the `SeqIO.convert(…)` function returns the number of sequences it converted - here only one. Also have a look at the output file:
-
+Also have a look at the output file:
 ```
 $ head NC_000913_converted.fasta
 >NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.
@@ -224,28 +222,24 @@ GCGATGATTGAAAAAACCATTAGCGGCCAGGATGCTTTACCCAATATCAGCGATGCCGAA
 **Warning:** The output will over-write any pre-existing file of the same name.
 
 
-The SeqIO.convert(...) function is effectively a shortcut combining SeqIO.parse(...) for input SeqIO.write(...) for output. Here's how you'd do this explictly:
-
+There is also a handy helper function to convert a file:
 ```python
-from Bio import SeqIO
-input_filename = "NC_000913.gbk"
-output_filename = "NC_000913_converted.fasta"
-records_iterator = SeqIO.parse(input_filename, "gb")
-count = SeqIO.write(records_iterator, output_filename, "fasta")
-print(str(count) + " records converted")
+>>> from Bio import SeqIO
+>>> help(SeqIO.convert)
 ```
-Previously we'd always used the results from `SeqIO.parse(…)` in a for loop - but here the for loop happens inside the SeqIO.write(...) function.
 
-`The SeqIO.write(…)` function is happy to be given multiple records like this, or simply as a list of `SeqRecord objects`. You can also give it just one record.
+The `SeqIO.convert()` function is effectively a shortcut combining `SeqIO.parse()` for input and `SeqIO.write()` for output.
 
-We'll be doing this in the next example, where we call `SeqIO.write(..)` several times in order to build up a mult-record output file.
+`The SeqIO.write()` function is happy to be given multiple records like this, or simply as a list of `SeqRecord objects`. You can also give it just one record.
+
+We'll be doing this in the next example, where we call `SeqIO.write()` several times in order to build up a mult-record output file.
 
 #### Filtering a sequence file
 
-The simplest solution is to open and close the file explicitly, using a file handle. The SeqIO functions are happy to work with either filenames (strings) or file handles, and this is a case where the more low-level handle is useful.
+The simplest solution is to open and close the file explicitly, using a file handle. The `SeqIO` functions are happy to work with either filenames (strings) or file handles, and this is a case where the more low-level handle is useful.
 
-Here's a working version of the script, save this as length_filter.py:
-
+Here's a working version of the script, save this as `length_filter.py`:
+```python
 from Bio import SeqIO
 input_filename = "NC_000913.faa"
 output_filename = "NC_000913_long_only.faa"
@@ -259,13 +253,15 @@ for record in SeqIO.parse(input_filename, "fasta"):
         SeqIO.write(record, output_handle, "fasta")
 output_handle.close()
 print(str(count) + " records selected out of " + str(total))
+```
 This time we get the expected output - and it is much faster (needlessly creating and replacing several thousand small files is slow):
-
+```
 $ python length_filter.py
-3719 records selected out of 4141
+3720 records selected out of 4141
 $ grep -c "^>" NC_000913_long_only.faa
-3719
+3720
 Yay!
+```
 
 #### Filtering by record name
 
@@ -278,7 +274,8 @@ False
 >>> "PGSC0003DMP400020972" in wanted_ids
 True
 ```
-Exercise: Guided by the filter_length.py script, write a new script starting as follows which writes out the potato proteins on this list:
+**Exercise**   
+Guided by the `filter_length.py` script, write a new script starting as follows which writes out the potato proteins on this list:
 
 ```python
 from Bio import SeqIO
@@ -288,9 +285,9 @@ output_filename = "wanted_potato_proteins.fasta"
 count = 0
 total = 0
 output_handle = open(output_filename, "w")
-# ...
-# Your code here
-# ...
+\# ...
+\# Your code here
+\# ...
 output_handle.close()
 print(str(count) + " records selected out of " + str(total))
 ```
@@ -302,29 +299,84 @@ $ python filter_wanted_id.py
 3 records selected out of 39031
 ```
 
-Advanced Exercise: Modify this to read the list of wanted identifiers from a plain text input file (one identifier per line).
+**Advanced Exercise:** Modify this to read the list of wanted identifiers from a plain text input file (one identifier per line).
 
-Discussion: What happens if a wanted identifier is not in the input file? What happens if an identifer appears twice? What order is the output file?
+**Discussion:** What happens if a wanted identifier is not in the input file? What happens if an identifer appears twice? What order is the output file?
 
 ### Working with Sequence Features
 
 Read [this chapter](https://github.com/peterjc/biopython_workshop/blob/master/using_seqfeatures/README.rst) from Peter Cook's workshop.
   
   
-There is much more functionality, e.f. Biopython's `SeqIO.index(…)` function which lets us treat a sequence file like a Python dictionary. You can learn about them in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
+There is much functionality of `SeqIO`, e.g. Biopython's `SeqIO.index(…)` function which lets us treat a sequence file like a Python dictionary. You can learn about them in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
 
 
 ## 6.6. Multiple Alignments
 
-https://github.com/peterjc/biopython_workshop/blob/master/reading_writing_alignments/README.rst
+`Bio.AlignIO` deals with files containing one or more sequence alignments represented as Alignment objects.
+
+If you are interested in Multiple Alignments you can have a look at Peter's [workshop](https://github.com/peterjc/biopython_workshop/blob/master/reading_writing_alignments/README.rst)
 
 
+## 6.7 Blast
+
+
+BLAST can be run with BioPython either from using the command line tools -- provided they are installed -- or through the web. In this section, we use the qblast from the Bio.Blast.NCBIWWW module to call the online version of BLAST. Note that the results would be the same if we were to use the command line tools. As pointed out from the qblast documentation, there are three required arguments:
+
+The first argument is the blast program to use for the search, as a lower case string. The options and descriptions of the programs are available at http://www.ncbi.nlm.nih.gov/BLAST/blast_program.shtml. Currently qblast only works with blastn, blastp, blastx, tblast and tblastx.
+The second argument specifies the database in which to perform the search. Again, the options for this are available on the NCBI web pages at http://www.ncbi.nlm.nih.gov/BLAST/blast_databases.shtml.
+The third argument is a string containing your query sequence. This can either be the sequence itself, the sequence in fasta format, or an identifier like a GI number.
+
+
+The default output format for qblast is XML.
+
+
+Web blast queries take relatively long.  Local BLAST allows you to search a custom database, or use a very large query. Installing ncbi-blast is straight-forward on Ubuntu:
+
+```
+sudo apt-get install ncbi-blast+
+```
+installs blastn, blastp, blastx,… in your path.
+
+Blast binaries can be downloaded from [here](http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download).
+
+## 6.8. NCBI's Entrez databases
+
+### Overview databases
+
+![image](NCBI_databases.png)
+
+Entrez (http://www.ncbi.nlm.nih.gov/Entrez) is a data retrieval system that provides users access to NCBI’s databases such as PubMed, GenBank, GEO, and many others. You can access Entrez from a web browser to manually enter queries, or you can use Biopython’s Bio.Entrez module for programmatic access to Entrez. The latter allows you for example to search PubMed or download GenBank records from within a Python script.
+
+The Bio.Entrez module makes use of the Entrez Programming Utilities (also known as EUtils), consisting of eight tools that are described in detail on NCBI’s page at http://www.ncbi.nlm.nih.gov/entrez/utils/. Each of these tools corresponds to one Python function in the Bio.Entrez module, as described in the sections below. This module makes sure that the correct URL is used for the queries, and that not more than one request is made every three seconds, as required by NCBI.
+
+You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
+
+## 6.9. Graphics
+
+The `Bio.Graphics` module can plot chromosome and karyogram plots with annotations.  It can create PDF,EPS SVG output files as well as bitmap images (including JPEG, PNG, GIF, BMP and PICT formats).
+
+**Examples**  
+
+- Genome organization of a Bacterium [(publication)](doi:10.1007/s10482-009-9316-9)
+
+<img src="VanDerAuweraFig1.gif" style="width: 300px;"/>
+<img src="VanDerAuweraFig2.gif" style="width: 400px;"/>
+
+- Locations of tRNA genes in the Arabidopsis*genome.
+
+![image](tRNA_chrom.png)
+
+You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html).
 
 # 7. Regular Expressions
 
+
+check also http://www.dalkescientific.com/writings/NBN/
+
 ## Introduction
 
-Regular expressions (aka regex or RE) is a tiny programming language to describe sets of strings, a sort of pattern.
+Regular expressions (aka regex or regexp or RE) is a tiny programming language to describe sets of strings, a sort of pattern.
 
 A first example: count the number of fasta sequences in a file (fast & safe):
 ```
@@ -594,6 +646,10 @@ print(result)
 
 # Links
 
+**Biopython**
+
+[Short Tutorial (interactive notebook)](http://nbviewer.ipython.org/github/gditzler/bio-course-materials/blob/master/notebooks/BioPython-Tutorial.ipynb)
+
 **Online tools to try regular expressions**  
 - [http://regex101.com/](http://regex101.com/)   
 - [http://www.regexr.com/](http://www.regexr.com/)   
@@ -627,3 +683,16 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__M
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.fna
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.ffn
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa
+http://potato.plantbiology.msu.edu/data/PGSC_DM_v3.4_pep_representative.fasta.zip
+
+
+
+from http://fenyolab.org/presentations/Introduction_Biostatistics_Bioinformatics_2014/pdf/homework2.pdf
+Bioinformatics data is heavy on strings (sequences) and various types of tab delimited tables,
+as well as some key:value pairs such as GenBank records (field header: field contents). There
+are also some complex data structures such as multiple alignments, phylogenetic trees, etc.
+BioPython is a collection of Python modules that provide functions to deal with Bioinformatics
+data types and functions for useful computing operations (reverse complement a DNA string,
+find motifs in protein sequences, access web servers, etc.) as well as ‘wrappers’ that provide
+interfaces to run other software (both via webservers and installed on your local computer) and
+work with the output.
