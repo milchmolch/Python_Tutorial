@@ -16,12 +16,17 @@ Stefan Wyder
 Chapters organized like in [BioPython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
 
 **Heidi**  
+[Theory](URPP_Tutorial_Python_HL2.pdf) | [Exercises](Exercises_Python_Tutorial_HL2.pdf) | [Data](data_Python2_HL.zip)  
+
 1  Introduction  
 2  What can you do with Biopython?  
 3  Sequence objects  
 4  Sequence annotation objects  
 
+
 **Stefan**  
+(see below)  
+
 5  Sequence Input/Output  
 6  Multiple Sequence Alignment objects  
 7  BLAST  
@@ -508,6 +513,7 @@ You can learn more in the [Biopython Tutorial](http://biopython.org/DIST/docs/tu
 
 - [Short Tutorial (interactive notebook)](http://nbviewer.ipython.org/github/gditzler/bio-course-materials/blob/master/notebooks/BioPython-Tutorial.ipynb)
 
+- [List of Python bioinformatics packages on Pypi (>600)](https://pypi.python.org/pypi?:action=browse&show=all&c=385&c=388)
 
 # ideas / to add
 
