@@ -93,12 +93,14 @@ MyResult.group(2)
 
 ##Functions that use regular expressions
 
--------------------|----------------
-Function | |    
+Function | Description
+-------------------|----------------   
 re.sub(query, replacement, string) | Make *all* substitutions in a string    
 re.search() | Detect the presence of a pattern
 re.match() |  Like re.search but only if pattern matches the entire string
 re.split() | Split a string according to a pattern
+
+
 
 
 ##Replacing text / Substitution
