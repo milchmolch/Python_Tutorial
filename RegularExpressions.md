@@ -9,6 +9,9 @@ Stefan Wyder
 # Regular Expressions
 
 
+[Presentation](URPP_Tutorial_RegExp.pdf)
+
+
 ## Introduction
 
 Regular expressions (aka regex or regexp or RE) is a tiny programming language to describe sets of strings, a sort of pattern.
