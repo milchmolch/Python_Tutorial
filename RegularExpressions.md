@@ -9,8 +9,6 @@ Stefan Wyder
 # Regular Expressions
 
 
-check also http://www.dalkescientific.com/writings/NBN/
-
 ## Introduction
 
 Regular expressions (aka regex or regexp or RE) is a tiny programming language to describe sets of strings, a sort of pattern.
@@ -284,9 +282,13 @@ X20120401_Wyderrun31_1482.05.1_08.RCC
 **Cheat Sheets**  
 - [CheatSheet from Practical Computing Biologists](http://practicalcomputing.org/files/PCfB_Appendices.pdf)
 
-**Regular Expression in other languages**  
+**Regular expression in other languages**  
 - [in R](http://en.wikibooks.org/wiki/R_Programming/Text_Processing#Functions_which_use_regular_expressions_in_R)  
 - [using sed](http://www.grymoire.com/Unix/Sed.html#uh-4)
+
+**More on regular expressions*
+- [5 Videos on Software Carpentry](http://software-carpentry.org/v4/regexp/index.html)
+- [Sequence Analysis with RegExps](http://www.dalkescientific.com/writings/NBN/slides/regexps.pdf)
 
 # Solutions 
 
