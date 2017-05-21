@@ -10,7 +10,7 @@ Stefan Wyder & Heidi Lischer
 ## Introduction to Python
 
 
-###Day 1###
+### Day 1
 
 1. Introduction (Why Python?)
 2. Basics
@@ -27,7 +27,7 @@ Stefan Wyder & Heidi Lischer
 [Theory](URPP_Tutorial_Python_HL.pdf) | [Exercises](Exercises_Python_Tutorial_HL.pdf) | [Data](Python_Data_HL.zip)
 
 
-###Day 2###
+### Day 2
 
 11. Object-Oriented Programming
 12. [BioPython](Python_Tutorial_2_SW.md) | [Solutions](Solutions_Python_2.md)
